@@ -1,15 +1,12 @@
 /*****************************************************************************
-* | File      	:	EPD_7in5_V2.h
+* | File      	:   ImageData.h
 * | Author      :   Waveshare team
-* | Function    :   Electronic paper driver
-* | Info        :
+* | Function    :	
 *----------------
-* |	This version:   V3.0
-* | Date        :   2023-12-18
-* | Info        :   
-* 1.Remove:ImageBuff[EPD_HEIGHT * EPD_WIDTH / 8]
-* 2.Change:EPD_Display(UBYTE *Image)
-*   Need to pass parameters: pointer to cached data
+* |	This version:   V1.0
+* | Date        :   2018-10-23
+* | Info        :
+*
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documnetation files (the "Software"), to deal
@@ -29,34 +26,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
+
 ******************************************************************************/
 #pragma once
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#ifndef _EPD_7IN5_V2_H_
-#define _EPD_7IN5_V2_H_
+#ifndef _IMAGEDATA_H_
+#define _IMAGEDATA_H_
+// ImageData2
+extern const unsigned char gImage_2in13b_V4b[];
+extern const unsigned char gImage_2in13b_V4r[];
 
-#include "DEV_Config.h"
 
+/* ------------------------------------------------ */
+// Imagedata
+extern const unsigned char flagimage[];
 
-// Display resolution
-#define EPD_7IN5_V2_WIDTH       800
-#define EPD_7IN5_V2_HEIGHT      480
-
-UBYTE EPD_7IN5_V2_Init(void);
-UBYTE EPD_7IN5_V2_Init_Fast(void);
-UBYTE EPD_7IN5_V2_Init_Part(void);
-UBYTE EPD_7IN5_V2_Init_4Gray(void);
-void EPD_7IN5_V2_Clear(void);
-void EPD_7IN5_V2_ClearBlack(void);
-void EPD_7IN5_V2_Display(UBYTE *blackimage);
-void EPD_7IN5_V2_Display_Part(UBYTE *blackimage,UDOUBLE x_start, UDOUBLE y_start, UDOUBLE x_end, UDOUBLE y_end);
-void EPD_7IN5_V2_Display_4Gray(const UBYTE *Image);
-void EPD_7IN5_V2_Sleep(void);
+extern const unsigned char gImage_7in5[];
+extern const unsigned char gImage_7in5_V2[];
+extern const unsigned char gImage_7in5bc_b[];
+extern const unsigned char gImage_7in5bc_ry[];
+extern const unsigned char gImage_7in5_V2_b[];
+extern const unsigned char gImage_7in5_V2_ry[];
 
 #endif
+/* FILE END */
 
 #ifdef __cplusplus
 }

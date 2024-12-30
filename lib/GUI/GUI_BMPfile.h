@@ -42,6 +42,11 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef __GUI_BMPFILE_H
 #define __GUI_BMPFILE_H
 
@@ -91,4 +96,8 @@ UBYTE GUI_ReadBmp_16Gray(const char *path, UWORD Xstart, UWORD Ystart);
 UBYTE GUI_ReadBmp_RGB_4Color(const char *path, UWORD Xstart, UWORD Ystart);
 UBYTE GUI_ReadBmp_RGB_6Color(const char *path, UWORD Xstart, UWORD Ystart);
 UBYTE GUI_ReadBmp_RGB_7Color(const char *path, UWORD Xstart, UWORD Ystart);
+#endif
+
+#ifdef __cplusplus
+}
 #endif

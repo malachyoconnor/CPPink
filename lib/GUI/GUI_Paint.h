@@ -67,11 +67,16 @@
 * THE SOFTWARE.
 *
 ******************************************************************************/
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef __GUI_PAINT_H
 #define __GUI_PAINT_H
 
 #include "DEV_Config.h"
-#include "../Fonts/fonts.h"
+#include "../fonts/fonts.h"
 
 /**
  * Image attributes
@@ -212,6 +217,6 @@ void Paint_DrawBitMap(const unsigned char* image_buffer);
 #endif
 
 
-
-
-
+#ifdef __cplusplus
+}
+#endif
