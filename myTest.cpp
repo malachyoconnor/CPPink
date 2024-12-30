@@ -4,9 +4,12 @@
 #include <iostream>
 #include "myTest.h"
 
-#include "lib/Config/DEV_Config.h"
-#include "lib/ePaper/EPD_7in5_V2.h"
-#include "lib/GUI/GUI_Paint.h"
+#include "EPD_Test.h"
+#include "DEV_Config.h"
+#include "EPD_7in5_V2.h"
+#include "GUI_Paint.h"
+#include "fonts.h"
+
 using namespace std;
 
 void EXIT() {
@@ -26,7 +29,6 @@ void EXIT() {
 
 void DrawText(UWORD xStart, UWORD yStart, const char text[], sFONT *Font,
               UWORD foreground, UWORD background) {
-
     UWORD dx = Font->Width;
     for (int i = 0; i < sizeof(text) - 1; i++) {
         Paint_DrawChar(xStart + dx * i, yStart, text[i], Font, foreground, background);
@@ -51,35 +53,37 @@ void DISPLAY_TEXT(UBYTE *BLACK_IMAGE) {
 }
 
 int my_test() {
-    cout << ("Doing MY test!\n") << endl;
+    EPD_7in5_V2_test();
 
-    if (DEV_Module_Init() != 0) {
-        return -1;
-    }
-
-    cout << "e-Paper Init and Clear..." << endl;
-    EPD_7IN5_V2_Init();
-    EPD_7IN5_V2_Clear();
-
-    //Create a new image cache
-    UBYTE *BLACK_IMAGE;
-    const UDOUBLE IMAGE_SIZE = (EPD_7IN5_V2_WIDTH / 8) * EPD_7IN5_V2_HEIGHT;
-
-    if ((BLACK_IMAGE = (UBYTE *) malloc(IMAGE_SIZE)) == NULL) {
-        cout << "Failed to apply for black memory..." << endl;
-        return -1;
-    }
-
-    cout << "Paint_NewImage" << endl;
-    Paint_NewImage(BLACK_IMAGE, EPD_7IN5_V2_WIDTH, EPD_7IN5_V2_HEIGHT, 0, GRAY2);
-
-
-    DEV_Delay_ms(1500);
-
-    DISPLAY_TEXT(BLACK_IMAGE);
-
-    EXIT();
-    free(BLACK_IMAGE);
+    // cout << ("Doing MY test!\n") << endl;
+    //
+    // if (DEV_Module_Init() != 0) {
+    //     return -1;
+    // }
+    //
+    // cout << "e-Paper Init and Clear..." << endl;
+    // EPD_7IN5_V2_Init();
+    // EPD_7IN5_V2_Clear();
+    //
+    // //Create a new image cache
+    // UBYTE *BLACK_IMAGE;
+    // const UDOUBLE IMAGE_SIZE = (EPD_7IN5_V2_WIDTH / 8) * EPD_7IN5_V2_HEIGHT;
+    //
+    // if ((BLACK_IMAGE = (UBYTE *) malloc(IMAGE_SIZE)) == NULL) {
+    //     cout << "Failed to apply for black memory..." << endl;
+    //     return -1;
+    // }
+    //
+    // cout << "Paint_NewImage" << endl;
+    // Paint_NewImage(BLACK_IMAGE, EPD_7IN5_V2_WIDTH, EPD_7IN5_V2_HEIGHT, 0, GRAY2);
+    //
+    //
+    // DEV_Delay_ms(1500);
+    //
+    // DISPLAY_TEXT(BLACK_IMAGE);
+    //
+    // EXIT();
+    // free(BLACK_IMAGE);
 
 
     return 0;
