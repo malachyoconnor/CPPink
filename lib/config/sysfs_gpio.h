@@ -28,6 +28,12 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #ifndef __SYSFS_GPIO_
 #define __SYSFS_GPIO_
 
@@ -81,4 +87,8 @@ int SYSFS_GPIO_Direction(int Pin, int Dir);
 int SYSFS_GPIO_Read(int Pin);
 int SYSFS_GPIO_Write(int Pin, int value);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

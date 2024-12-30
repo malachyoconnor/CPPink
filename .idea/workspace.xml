@@ -8,10 +8,11 @@
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
+    <option name="/Default/Housekeeping/RefactoringsMru/RenameRefactoring/DoSearchForTextInStrings/@EntryValue" value="true" type="bool" />
   </component>
-  <component name="CMakePresetLoader">{
-  &quot;useNewFormat&quot;: true
-}</component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
@@ -20,9 +21,12 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="CPPink" targetName="config" />
       <config projectName="CPPink" targetName="myTest" />
       <config projectName="CPPink" targetName="GUI" />
       <config projectName="CPPink" targetName="ePaper" />
+      <config projectName="CPPink" targetName="examples" />
+      <config projectName="CPPink" targetName="fonts" />
       <config projectName="CPPink" targetName="CPPink" />
     </generated>
   </component>
@@ -32,7 +36,46 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f492d998-86b2-4f7a-ad52-1a69709f0ba1" name="Changes" comment="First pass inclusion of the C files into CPP" />
+    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/examples/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/EPD_7in5_V2_test.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/EPD_7in5_V2_test_old.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/EPD_Test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/ImageData.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/ImageData.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/examples/main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/fonts/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/DEV_Config.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/DEV_Config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/DEV_Config.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/DEV_Config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/Debug.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/Debug.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/RPI_gpiod.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/RPI_gpiod.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/RPI_gpiod.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/RPI_gpiod.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/dev_hardware_SPI.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/dev_hardware_SPI.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/dev_hardware_SPI.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/dev_hardware_SPI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/sysfs_gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/sysfs_gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/sysfs_gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/sysfs_gpio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/sysfs_software_spi.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/sysfs_software_spi.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Config/sysfs_software_spi.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/sysfs_software_spi.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font12.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font12.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font12CN.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font12CN.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font16.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font16.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font20.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font20.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font24.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font24.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font24CN.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font24CN.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/font8.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/font8.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Fonts/fonts.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/fonts/fonts.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/GUI/GUI_Paint.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GUI/GUI_Paint.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5_V2.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ePaper/EPD_7in5_V2.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myTest.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,24 +85,8 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CMakeLists.txt" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="HARD" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -67,18 +94,17 @@
     <option name="minorVersion" value="3.1.1" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2quVf5oOSTsdCQVwkLCqkF2hNBM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2qugQePdiZTP5NpJMKRn59w0NUi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C/C++ File.main.cpp.executor": "Run",
+    "Batch.sync.executor": "Run",
     "CMake Application.CPPink.executor": "Run",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -91,30 +117,44 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/dev/eInk/CPPink/lib/GUI",
+    "last_opened_file_path": "C:/dev/eInk/CPPink/lib/examples",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/malac/CLionProjects/untitled/main.cpp",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "onboarding.tips.debug.path": "C:/dev/eInk/CPPink/main.cpp",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\eInk\CPPink\lib\GUI" />
+      <recent name="C:\dev\eInk\CPPink\lib\examples" />
       <recent name="C:\dev\eInk\CPPink\lib" />
-      <recent name="C:\dev\eInk\CPPink\lib\e-Paper" />
+      <recent name="C:\dev\eInk\CPPink\lib\Fonts" />
       <recent name="C:\dev\eInk\CPPink" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\dev\eInk\CPPink" />
+      <recent name="C:\dev\eInk\CPPink\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.CPPink">
+  <component name="RunManager" selected="Batch.sync">
+    <configuration name="sync" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="CPPink" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\dev\eInk\CPPink" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="sync.bat" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CPPink" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="CPPink" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CPPink" RUN_TARGET_NAME="CPPink">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -125,7 +165,22 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="config" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="config" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ePaper" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="ePaper" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="examples" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="examples" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fonts" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="fonts" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -135,55 +190,32 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
-      <option name="sourceFile" value="main.cpp" />
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="C/C++ File.main.cpp" />
+      <item itemvalue="Batch.sync" />
       <item itemvalue="CMake Application.CPPink" />
       <item itemvalue="CMake Application.myTest" />
+      <item itemvalue="CMake Application.config" />
       <item itemvalue="CMake Application.ePaper" />
+      <item itemvalue="CMake Application.examples" />
+      <item itemvalue="CMake Application.fonts" />
       <item itemvalue="CMake Application.GUI" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="C/C++ File.main.cpp" />
+        <item itemvalue="Batch.sync" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f492d998-86b2-4f7a-ad52-1a69709f0ba1" name="Changes" comment="" />
-      <created>1735512546227</created>
+      <changelist id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="" />
+      <created>1735517859849</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1735512546227</updated>
-      <workItem from="1735512547383" duration="77000" />
-      <workItem from="1735512653221" duration="3612000" />
-      <workItem from="1735516302321" duration="298000" />
-      <workItem from="1735516609703" duration="572000" />
+      <updated>1735517859849</updated>
+      <workItem from="1735517860978" duration="5333000" />
     </task>
-    <task id="LOCAL-00001" summary="Adding initial library files, and a first pass conversion.">
-      <option name="closed" value="true" />
-      <created>1735516035506</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1735516035506</updated>
-    </task>
-    <task id="LOCAL-00002" summary="First pass inclusion of the C files into CPP">
-      <option name="closed" value="true" />
-      <created>1735517170303</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1735517170303</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,36 +225,5 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-    <MESSAGE value="Adding initial library files, and a first pass conversion." />
-    <MESSAGE value="First pass inclusion of the C files into CPP" />
-    <option name="LAST_COMMIT_MESSAGE" value="First pass inclusion of the C files into CPP" />
   </component>
 </project>

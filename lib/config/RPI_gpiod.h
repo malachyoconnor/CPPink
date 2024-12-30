@@ -28,6 +28,12 @@
 # THE SOFTWARE.
 #
 ************************D******************************************************/
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #ifndef __GPIOD_
 #define __GPIOD_
 
@@ -85,4 +91,8 @@ int GPIOD_Direction(int Pin, int Dir);
 int GPIOD_Read(int Pin);
 int GPIOD_Write(int Pin, int value);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

@@ -28,6 +28,12 @@
 # THE SOFTWARE.
 #
 ******************************************************************************/
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #ifndef __SYSFS_SOFTWARE_SPI_
 #define __SYSFS_SOFTWARE_SPI_
 
@@ -108,4 +114,8 @@ void SYSFS_software_spi_setDataMode(uint8_t mode);
 void SYSFS_software_spi_setClockDivider(uint8_t div);
 uint8_t SYSFS_software_spi_transfer(uint8_t value);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

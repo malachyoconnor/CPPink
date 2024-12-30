@@ -55,7 +55,7 @@ void DEV_Digital_Write(UWORD Pin, UBYTE Value)
 	bcm2835_gpio_write(Pin, Value);
 #elif USE_WIRINGPI_LIB
 	digitalWrite(Pin, Value);
-#elif  USE_LGPIO_LIB  
+#elif USE_LGPIO_LIB
     lgGpioWrite(GPIO_Handle, Pin, Value);
 #elif USE_DEV_LIB
 	GPIOD_Write(Pin, Value);
@@ -388,7 +388,7 @@ UBYTE DEV_Module_Init(void)
 		printf("bcm2835 init success !!! \r\n");
 	}
 
-	// GPIO Config
+	// GPIO config
 	DEV_GPIO_Init();
 
 	bcm2835_spi_begin();                                         //Start spi interface, set spi pin for the reuse function
@@ -407,7 +407,7 @@ UBYTE DEV_Module_Init(void)
 		printf("set wiringPi lib success !!! \r\n");
 	}
 
-	// GPIO Config
+	// GPIO config
 	DEV_GPIO_Init();
 	wiringPiSPISetup(0,10000000);
 	// wiringPiSPISetupMode(0, 32000000, 0);
