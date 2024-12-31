@@ -74,7 +74,7 @@ int SaveBMP(const filesystem::path &location, BmpImage &bmpImage) {
 
 BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     const auto bmpFileHeader = BMP_FILE_HEADER{
-        .bType = ('M' << 8) | 'B',  // little-endian 0x4D42
+        .bType = ('M' << 8) | 'B', // little-endian 0x4D42
         .bSize = 54 + 8 + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT,
         .bReserved1 = 0,
         .bReserved2 = 0,
@@ -94,6 +94,10 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
         .biClrUsed = 2,
         .biClrImportant = 0,
     };
+
+    // TODO: This caused an munmap_chunk(): invalid pointer error
+    // vector<char> dataVec = vector<char>(SCREEN_ARRAY_HEIGHT * SCREEN_ARRAY_WIDTH);
+    // ranges::copy_backward(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_HEIGHT * SCREEN_ARRAY_WIDTH, dataVec.data());
 
     return BmpImage{
         bmpFileHeader,

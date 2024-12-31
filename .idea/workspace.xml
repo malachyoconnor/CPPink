@@ -37,14 +37,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="Creating a BMP library and restructuring.">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="Libraries playing nice - able to save a bmp file of the result.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myLibs/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myLibs/myGUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myLibs/myGui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGui.cpp" afterDir="false" />
     </list>
@@ -266,7 +261,7 @@
       <option name="presentableId" value="Default" />
       <updated>1735517859849</updated>
       <workItem from="1735517860978" duration="37343000" />
-      <workItem from="1735608477115" duration="6234000" />
+      <workItem from="1735608477115" duration="9455000" />
     </task>
     <task id="LOCAL-00001" summary="Some renaming and cleanup">
       <option name="closed" value="true" />
@@ -316,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735612266384</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Libraries playing nice - able to save a bmp file of the result.">
+      <option name="closed" value="true" />
+      <created>1735614885208</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735614885208</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,6 +348,7 @@
     <MESSAGE value="Working MVP with example!" />
     <MESSAGE value="Updating README." />
     <MESSAGE value="Creating a BMP library and restructuring." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating a BMP library and restructuring." />
+    <MESSAGE value="Libraries playing nice - able to save a bmp file of the result." />
+    <option name="LAST_COMMIT_MESSAGE" value="Libraries playing nice - able to save a bmp file of the result." />
   </component>
 </project>

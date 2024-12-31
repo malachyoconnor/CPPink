@@ -23,14 +23,13 @@ private:
     ~Gui();
     PIXEL_ARRAY pixels_{};
     UBYTE* getContiguousStore();
-    void drawBlackPixel(int x, int y);
+    void flipPixel(int x, int y);
 
 public:
     static Gui& instance();
     Gui(const Gui&) = delete;
     Gui& operator=(const Gui&) = delete;
 
-    int refreshScreen();
     int drawSomeStuff();
     void printInternalArray() const;
     void saveBmpFile() const;
