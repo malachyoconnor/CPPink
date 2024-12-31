@@ -1,5 +1,5 @@
 add_library(ePaper STATIC
-        EPD_7in5_V2.c
+        EPD_7in5_V2.c EPD_7in5_V2.h
 )
 
 target_include_directories(ePaper

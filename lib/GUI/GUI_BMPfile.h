@@ -64,7 +64,7 @@ typedef struct BMP_FILE_HEADER {
     UWORD bReserved1;   //Reserved value, must be set to 0
     UWORD bReserved2;   //Reserved value, must be set to 0
     UDOUBLE bOffset;    //The offset from the beginning of the file header to the beginning of the image data bit
-} __attribute__ ((packed)) BMPFILEHEADER;    // 14bit
+} __attribute__ ((packed)) BMP_FILE_HEADER;    // 14bit
 
 /*Bitmap information header  40bit*/
 typedef struct BMP_INFO {
@@ -79,7 +79,7 @@ typedef struct BMP_INFO {
     UDOUBLE biYPelsPerMeter; //Vertical resolution
     UDOUBLE biClrUsed;       //The number of colors used
     UDOUBLE biClrImportant;  //The number of important colors
-} __attribute__ ((packed)) BMPINFOHEADER;
+} __attribute__ ((packed)) BMP_INFO_HEADER;
 
 /*Color table: palette */
 typedef struct RGB_QUAD {
