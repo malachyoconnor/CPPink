@@ -1,3 +1,5 @@
+#include <ImageData.h>
+
 #include "myGUI.h"
 #include "myBmpManager.h"
 #include <iostream>
@@ -74,6 +76,14 @@ int Gui::drawSomeStuff() {
     }
 
     EPD_7IN5_V2_Display(getContiguousStore());
+    DEV_Delay_ms(2000);
+
+    UBYTE tmp[100 * 480]{0};
+    for (int i = 0; i < 100*480; i++) {
+        tmp[i] = gImage_7in5[i];
+    }
+
+    EPD_7IN5_V2_Display(tmp);
     DEV_Delay_ms(20000);
     return 0;
 }

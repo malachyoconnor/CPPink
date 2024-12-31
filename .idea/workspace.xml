@@ -7,8 +7,9 @@
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
     <option name="/Default/Housekeeping/RefactoringsMru/RenameRefactoring/DoSearchForTextInStrings/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppIncludesOrderOptions" type="string" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
   </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
@@ -37,15 +38,19 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="Libraries playing nice - able to save a bmp file of the result.">
+    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="More MVPification.">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5_V2_old.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5_V2_old.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5b_V2.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5b_V2.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5b_V2_old.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/EPD_7in5b_V2_old.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_gpio.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_gpio.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_software_spi.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_software_spi.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/examples/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/examples/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/examples/EPD_7in5_V2_test_old.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myGui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +92,9 @@
     <setting file="file://$PROJECT_DIR$/myLibs/myBmpManager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/myLibs/myGUI.h" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2024" />
@@ -124,7 +132,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/dev/eInk/CPPink/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.rainbow.brackets.color&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -173,11 +181,6 @@
       </method>
     </configuration>
     <configuration name="GUI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="GUI" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -237,13 +240,13 @@
     <list>
       <item itemvalue="Batch.syncResult" />
       <item itemvalue="Batch.sync" />
-      <item itemvalue="CMake Application.myBmpManager" />
-      <item itemvalue="CMake Application.myGUI" />
+      <item itemvalue="CMake Application.GUI" />
       <item itemvalue="CMake Application.config" />
       <item itemvalue="CMake Application.ePaper" />
       <item itemvalue="CMake Application.examples" />
       <item itemvalue="CMake Application.fonts" />
-      <item itemvalue="CMake Application.GUI" />
+      <item itemvalue="CMake Application.myBmpManager" />
+      <item itemvalue="CMake Application.myGUI" />
       <item itemvalue="CMake Application.CPPink" />
       <item itemvalue="Python.scratch_1" />
     </list>
@@ -266,6 +269,10 @@
       <updated>1735517859849</updated>
       <workItem from="1735517860978" duration="37343000" />
       <workItem from="1735608477115" duration="9455000" />
+      <workItem from="1735619066981" duration="216000" />
+      <workItem from="1735619300935" duration="132000" />
+      <workItem from="1735619448585" duration="574000" />
+      <workItem from="1735620038725" duration="399000" />
     </task>
     <task id="LOCAL-00001" summary="Some renaming and cleanup">
       <option name="closed" value="true" />
@@ -323,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735614885208</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="More MVPification.">
+      <option name="closed" value="true" />
+      <created>1735618537352</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1735618537352</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,6 +368,11 @@
     <MESSAGE value="Updating README." />
     <MESSAGE value="Creating a BMP library and restructuring." />
     <MESSAGE value="Libraries playing nice - able to save a bmp file of the result." />
-    <option name="LAST_COMMIT_MESSAGE" value="Libraries playing nice - able to save a bmp file of the result." />
+    <MESSAGE value="More MVPification." />
+    <option name="LAST_COMMIT_MESSAGE" value="More MVPification." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
