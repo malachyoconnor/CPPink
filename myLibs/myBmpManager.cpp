@@ -23,9 +23,8 @@ std::unique_ptr<BmpImage> ReadBMP(filesystem::path path) {
     fileStream.read(reinterpret_cast<char *>(&bmpFileHeader), sizeof(BMP_FILE_HEADER));
     fileStream.read(reinterpret_cast<char *>(&bmpInfoHeader), sizeof(BMP_INFO_HEADER));
 
-    if (bmpInfoHeader.biBitCount != 1) {
-        throw std::runtime_error("Image was not black and white");
-    }
+    if (bmpFileHeader.bType != 'M' << 8 | 'B') throw std::runtime_error("Image is not a BMP file");
+    if (bmpInfoHeader.biBitCount != 1) throw std::runtime_error("Image was not black and white");
 
     unsigned long long colourTableBuffer;
     fileStream.read(reinterpret_cast<istream::char_type *>(&colourTableBuffer), 8);
@@ -56,7 +55,7 @@ std::unique_ptr<BmpImage> ReadBMP(filesystem::path path) {
     });
 }
 
-int WriteBMP(const filesystem::path &location, BmpImage &bmpImage) {
+int SaveBMP(const filesystem::path &location, BmpImage &bmpImage) {
     ofstream fileStream(location.string(), std::ios::binary);
 
     if (!fileStream.is_open()) {
@@ -75,7 +74,7 @@ int WriteBMP(const filesystem::path &location, BmpImage &bmpImage) {
 
 BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     const auto bmpFileHeader = BMP_FILE_HEADER{
-        .bType = 'B'<<8 | 'M',
+        .bType = ('M' << 8) | 'B',  // little-endian 0x4D42
         .bSize = 54 + 8 + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT,
         .bReserved1 = 0,
         .bReserved2 = 0,
@@ -84,7 +83,7 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     const auto bmpInfoHeader = BMP_INFO_HEADER{
         .biInfoSize = 40,
         .biWidth = (SCREEN_ARRAY_WIDTH) * 8,
-        .biHeight = static_cast<uint32_t>(pixels.size()),
+        .biHeight = SCREEN_ARRAY_HEIGHT,
         .biPlanes = 1,
         .biBitCount = 1,
         .biCompression = 0,
@@ -100,5 +99,6 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
         bmpFileHeader,
         bmpInfoHeader,
         vector<char>(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT),
+        COLOUR_TABLE
     };
 }

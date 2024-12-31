@@ -137,7 +137,6 @@ int my_old_test() {
 int main() {
     Gui &screenController = Gui::instance();
     screenController.drawSomeStuff();
-    screenController.printInternalArray();
 
     screenController.saveBmpFile();
 }

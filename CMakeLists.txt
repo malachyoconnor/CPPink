@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(CPPink LANGUAGES C CXX)
+set(CMAKE_BUILD_PARALLEL_LEVEL 8)
 
 # Would like to get rid of the -DRPI
 add_executable(CPPink main.cpp)

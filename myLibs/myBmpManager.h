@@ -1,10 +1,12 @@
 #ifndef MYBMPMANAGER_H
 #define MYBMPMANAGER_H
+
 #include <bitset>
 #include <filesystem>
 #include <GUI_BMPfile.h>
 #include <vector>
-
+#include <iostream>
+#include "myBmpManager.h"
 #include "myGUI.h"
 
 using namespace std;
@@ -25,13 +27,13 @@ struct BmpImage {
 
 std::unique_ptr<BmpImage> ReadBMP(filesystem::path path);
 
-int WriteBMP(const filesystem::path &location, BmpImage &bmpImage);
+int SaveBMP(const filesystem::path &location, BmpImage &bmpImage);
 
 BmpImage CreateBMP(const PIXEL_ARRAY &pixels);
 
-inline void PrintBMP(BmpImage &bmpImage) {
-    BMP_FILE_HEADER bmpFileHeader = bmpImage.bmpFileHeader;
-    BMP_INFO_HEADER bmpInfoHeader = bmpImage.bmpInfoHeader;
+inline void PrintBMP(const unique_ptr<BmpImage> &bmpImage) {
+    BMP_FILE_HEADER bmpFileHeader = bmpImage->bmpFileHeader;
+    BMP_INFO_HEADER bmpInfoHeader = bmpImage->bmpInfoHeader;
 
     cout << "bType " << bmpFileHeader.bType << endl;
     cout << "bSize " << bmpFileHeader.bSize << endl;
@@ -51,8 +53,8 @@ inline void PrintBMP(BmpImage &bmpImage) {
     cout << "biClrUsed: " << bmpInfoHeader.biClrUsed << endl;
     cout << "biClrImportant: " << bmpInfoHeader.biClrImportant << endl;
 
-    for (const char ch: bmpImage.data) {
-        cout << bitset<8>(ch);
+    for (const char ch: bmpImage->data) {
+        cout << std::hex << ch;
     }
     cout << endl;
 }

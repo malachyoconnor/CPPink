@@ -25,6 +25,7 @@
       <config projectName="CPPink" targetName="config" />
       <config projectName="CPPink" targetName="GUI" />
       <config projectName="CPPink" targetName="ePaper" />
+      <config projectName="CPPink" targetName="myGUI" />
       <config projectName="CPPink" targetName="examples" />
       <config projectName="CPPink" targetName="fonts" />
       <config projectName="CPPink" targetName="CPPink" />
@@ -36,22 +37,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="Updating README.">
-      <change afterPath="$PROJECT_DIR$/myLibs/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myLibs/myBmpManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myLibs/myGUI.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myLibs/myGui.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pic/simplestTest.bmp" afterDir="false" />
+    <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="Creating a BMP library and restructuring.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.c" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.h" beforeDir="false" afterPath="$PROJECT_DIR$/lib/GUI/GUI_BMPfile.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ePaper/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ePaper/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myTest.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/myTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myGUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGUI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myGui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +67,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "malachyoconnor"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:malachyoconnor/CPPink.git",
+    "accountId": "0d02e5a2-20ac-4725-9762-022ea2e330cc"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/array" root0="FORCE_HIGHLIGHTING" />
     <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/bits/stl_uninitialized.h" root0="FORCE_HIGHLIGHTING" />
@@ -95,42 +102,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Batch.sync.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Application.CPPink.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/eInk/CPPink/pic&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/dev/eInk/CPPink/main.cpp&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Batch.sync.executor": "Run",
+    "Batch.syncResult.executor": "Run",
+    "CMake Application.CPPink.executor": "Run",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/dev/eInk/CPPink",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/dev/eInk/CPPink/main.cpp",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\dev\eInk\CPPink\pic" />
       <recent name="C:\dev\eInk\CPPink" />
+      <recent name="C:\dev\eInk\CPPink\pic" />
       <recent name="C:\dev\eInk\CPPink\lib\examples" />
       <recent name="C:\dev\eInk\CPPink\lib" />
       <recent name="C:\dev\eInk\CPPink\lib\Fonts" />
@@ -141,13 +149,22 @@
       <recent name="C:\dev\eInk\CPPink\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.CPPink">
+  <component name="RunManager" selected="Batch.sync">
     <configuration name="sync" type="BatchConfigurationType" factoryName="Batch" temporary="true">
       <module name="CPPink" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="sync.bat" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="syncResult" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="CPPink" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\dev\eInk\CPPink" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="syncResult.bat" />
       <option name="PARAMETERS" value="" />
       <method v="2" />
     </configuration>
@@ -191,6 +208,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="myGUI" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="myGUI" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="scratch_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CPPink" />
       <option name="ENV_FILES" value="" />
@@ -214,8 +236,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Batch.syncResult" />
       <item itemvalue="Batch.sync" />
       <item itemvalue="CMake Application.myBmpManager" />
+      <item itemvalue="CMake Application.myGUI" />
       <item itemvalue="CMake Application.config" />
       <item itemvalue="CMake Application.ePaper" />
       <item itemvalue="CMake Application.examples" />
@@ -227,6 +251,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Batch.sync" />
+        <item itemvalue="Batch.syncResult" />
         <item itemvalue="CMake Application.CPPink" />
         <item itemvalue="Python.scratch_1" />
       </list>
@@ -241,7 +266,7 @@
       <option name="presentableId" value="Default" />
       <updated>1735517859849</updated>
       <workItem from="1735517860978" duration="37343000" />
-      <workItem from="1735608477115" duration="3575000" />
+      <workItem from="1735608477115" duration="6234000" />
     </task>
     <task id="LOCAL-00001" summary="Some renaming and cleanup">
       <option name="closed" value="true" />
@@ -283,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735523621981</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Creating a BMP library and restructuring.">
+      <option name="closed" value="true" />
+      <created>1735612266384</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1735612266384</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +344,7 @@
     <MESSAGE value="Saving C from C++'s wretched mangling" />
     <MESSAGE value="Working MVP with example!" />
     <MESSAGE value="Updating README." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating README." />
+    <MESSAGE value="Creating a BMP library and restructuring." />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating a BMP library and restructuring." />
   </component>
 </project>
