@@ -8,8 +8,9 @@
 #include "myGUI.h"
 
 using namespace std;
+constexpr uint16_t BMP_SIGNATURE = 'M' << 8 | 'B';
 
-std::unique_ptr<BmpImage> ReadBMP(filesystem::path path) {
+std::unique_ptr<BmpImage> OpenBMP(filesystem::path path) {
     if (!exists(path)) {
         cout << "Can't open the file!" << endl;
         throw std::runtime_error("File does not exist");
@@ -22,8 +23,10 @@ std::unique_ptr<BmpImage> ReadBMP(filesystem::path path) {
 
     fileStream.read(reinterpret_cast<char *>(&bmpFileHeader), sizeof(BMP_FILE_HEADER));
     fileStream.read(reinterpret_cast<char *>(&bmpInfoHeader), sizeof(BMP_INFO_HEADER));
+    cout << std::hex<< bmpFileHeader.bType << " THAT" << endl;
+    cout << std::hex << BMP_SIGNATURE << endl;
 
-    if (bmpFileHeader.bType != 'M' << 8 | 'B') throw std::runtime_error("Image is not a BMP file");
+    if (bmpFileHeader.bType != BMP_SIGNATURE) throw std::runtime_error("Image is not a BMP file");
     if (bmpInfoHeader.biBitCount != 1) throw std::runtime_error("Image was not black and white");
 
     unsigned long long colourTableBuffer;
@@ -44,8 +47,8 @@ std::unique_ptr<BmpImage> ReadBMP(filesystem::path path) {
     auto imageBytesToRead = imageWidthInBytes * bmpInfoHeader.biHeight;
 
     // Read the bmp file bytes
-    auto bmpDataVector = vector<char>(imageBytesToRead, 0xFF);
-    fileStream.read(bmpDataVector.data(), imageBytesToRead);
+    auto bmpDataVector = vector<uint8_t>(imageBytesToRead, 0xFF);
+    fileStream.read(reinterpret_cast<char *>(bmpDataVector.data()), imageBytesToRead);
     fileStream.close();
 
     return make_unique<BmpImage>(BmpImage{
@@ -66,7 +69,7 @@ int SaveBMP(const filesystem::path &location, BmpImage &bmpImage) {
     fileStream.write(reinterpret_cast<char *>(&bmpImage.bmpInfoHeader), sizeof(BMP_INFO_HEADER));
     fileStream.write(reinterpret_cast<char *>(&bmpImage.colourTable), sizeof(COLOUR_TABLE));
 
-    fileStream.write(bmpImage.data.data(), bmpImage.data.size());
+    fileStream.write(reinterpret_cast<char *>(bmpImage.data.data()), bmpImage.data.size());
     fileStream.close();
 
     return 0;
@@ -102,7 +105,7 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     return BmpImage{
         bmpFileHeader,
         bmpInfoHeader,
-        vector<char>(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT),
+        vector(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT),
         COLOUR_TABLE
     };
 }

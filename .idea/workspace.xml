@@ -39,17 +39,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df0c2a75-ea84-40aa-bbb7-3fdbad6f782a" name="Changes" comment="More MVPification.">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_gpio.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_gpio.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_software_spi.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/sysfs_software_spi.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/examples/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lib/examples/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/examples/EPD_7in5_V2_test_old.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myLibs/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myBmpManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myBmpManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myLibs/myGUI.h" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGUI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myLibs/myGui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myLibs/myGui.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +80,9 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/array" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/bits/stl_algobase.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/bits/stl_uninitialized.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/bits/stl_vector.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file:////wsl$/Ubuntu/usr/include/c++/11/bits/unique_ptr.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/lib/examples/ImageData.c" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/myLibs/myBmpManager.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -94,6 +91,9 @@
   </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -132,6 +132,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/dev/eInk/CPPink/main.cpp&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.rainbow.brackets.color&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -174,6 +175,11 @@
       <option name="SCRIPT_NAME" value="syncResult.bat" />
       <option name="PARAMETERS" value="" />
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
     </configuration>
     <configuration name="CPPink" type="CMakeRunConfiguration" factoryName="Application" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CPPink" TARGET_NAME="CPPink" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CPPink" RUN_TARGET_NAME="CPPink">
       <method v="2">
@@ -273,6 +279,11 @@
       <workItem from="1735619300935" duration="132000" />
       <workItem from="1735619448585" duration="574000" />
       <workItem from="1735620038725" duration="399000" />
+      <workItem from="1735659276208" duration="4210000" />
+      <workItem from="1735666535502" duration="960000" />
+      <workItem from="1735667510793" duration="245000" />
+      <workItem from="1735753866332" duration="596000" />
+      <workItem from="1735763516986" duration="2529000" />
     </task>
     <task id="LOCAL-00001" summary="Some renaming and cleanup">
       <option name="closed" value="true" />

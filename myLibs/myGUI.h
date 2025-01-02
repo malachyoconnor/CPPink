@@ -1,15 +1,15 @@
 #ifndef MYGUI_H
 #define MYGUI_H
-
 #include <array>
+#include <EPD_7in5_V2.h>
+#include <vector>
 #include <memory>
 #include <GUI_Paint.h>
-#include <EPD_7in5_V2.h>
+#include <myBmpManager.h>
 
 // Each bit is a pixel.
-constexpr int SCREEN_ARRAY_WIDTH = (EPD_7IN5_V2_WIDTH / 8);
-constexpr int SCREEN_ARRAY_HEIGHT = EPD_7IN5_V2_HEIGHT;
-typedef std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT> PIXEL_ARRAY;
+using PIXEL_ARRAY = std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
+constexpr int TOTAL_SCREEN_BYTES = SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT;
 
 class Gui {
     friend struct std::default_delete<Gui>;
@@ -22,7 +22,7 @@ private:
     Gui();
     ~Gui();
     PIXEL_ARRAY pixels_{};
-    UBYTE* getContiguousStore();
+    std::vector<UBYTE> getPixelCopyForScreen();
     void flipPixel(int x, int y);
 
 public:
@@ -31,8 +31,9 @@ public:
     Gui& operator=(const Gui&) = delete;
 
     int drawSomeStuff();
+    int drawBMP(BmpImage& image);
     void printInternalArray() const;
-    void saveBmpFile() const;
+    void saveScreenToBmp() const;
 };
 
 #endif //MYGUI_H

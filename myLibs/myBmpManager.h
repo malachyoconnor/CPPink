@@ -1,13 +1,13 @@
 #ifndef MYBMPMANAGER_H
 #define MYBMPMANAGER_H
 
-#include <bitset>
 #include <filesystem>
 #include <GUI_BMPfile.h>
 #include <vector>
 #include <iostream>
+
+#include "EPD_7in5_V2.h"
 #include "myBmpManager.h"
-#include "myGUI.h"
 
 using namespace std;
 
@@ -17,15 +17,20 @@ using namespace std;
 // ]) (remember it's little endian here - but it flips)
 constexpr unsigned long long COLOUR_TABLE = 0x00FFFFFF00000000;
 
-struct BmpImage {
+// Each bit is a pixel.
+constexpr int SCREEN_ARRAY_WIDTH = (EPD_7IN5_V2_WIDTH / 8);
+constexpr int SCREEN_ARRAY_HEIGHT = EPD_7IN5_V2_HEIGHT;
+using PIXEL_ARRAY = std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
+
+typedef struct {
     BMP_FILE_HEADER bmpFileHeader;
     BMP_INFO_HEADER bmpInfoHeader;
-    vector<char> data;
+    vector<uint8_t> data;
     unsigned long long colourTable = COLOUR_TABLE;
-};
+} BmpImage;
 
 
-std::unique_ptr<BmpImage> ReadBMP(filesystem::path path);
+std::unique_ptr<BmpImage> OpenBMP(filesystem::path path);
 
 int SaveBMP(const filesystem::path &location, BmpImage &bmpImage);
 

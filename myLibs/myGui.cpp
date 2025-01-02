@@ -1,9 +1,8 @@
-#include <ImageData.h>
-
 #include "myGUI.h"
 #include "myBmpManager.h"
 #include <iostream>
 #include <system_error>
+#include <bitset>
 
 Gui::Gui() {
     cout << "Initializing GUI" << endl;
@@ -12,6 +11,8 @@ Gui::Gui() {
     }
     EPD_7IN5_V2_Init();
     EPD_7IN5_V2_Clear();
+    // Fill the screen with white
+    fill_n(&pixels_[0][0], SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT, 0xFF);
 }
 
 Gui::~Gui() {
@@ -25,8 +26,8 @@ Gui::~Gui() {
     DEV_Module_Exit();
 }
 
-UBYTE *Gui::getContiguousStore() {
-    return &pixels_[0][0];
+vector<UBYTE> Gui::getPixelCopyForScreen() {
+    return {&pixels_[0][0], &pixels_[0][0] + (SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT)};
 }
 
 void Gui::flipPixel(int x, int y) {
@@ -39,8 +40,8 @@ void Gui::flipPixel(int x, int y) {
         throw std::runtime_error("Invalid screen array index");
     }
 
-    auto const initialByte = pixels_[rowByteNumber][colByteNumber];
-    auto const finalByte = initialByte | (1 << bitNumber);
+    const UBYTE initialByte = pixels_[rowByteNumber][colByteNumber];
+    const UBYTE finalByte = initialByte & ~(1 << bitNumber);
     pixels_[rowByteNumber][colByteNumber] = finalByte;
 }
 
@@ -75,20 +76,21 @@ int Gui::drawSomeStuff() {
         }
     }
 
-    EPD_7IN5_V2_Display(getContiguousStore());
-    DEV_Delay_ms(2000);
+    EPD_7IN5_V2_Display(getPixelCopyForScreen().data());
+    DEV_Delay_ms(5000);
 
-    UBYTE tmp[100 * 480]{0};
-    for (int i = 0; i < 100*480; i++) {
-        tmp[i] = gImage_7in5[i];
-    }
-
-    EPD_7IN5_V2_Display(tmp);
-    DEV_Delay_ms(20000);
     return 0;
 }
 
-void Gui::saveBmpFile() const {
+int Gui::drawBMP(BmpImage &image) {
+    cout << image.data.size() << endl;
+
+    EPD_7IN5_V2_Display(image.data.data());
+    DEV_Delay_ms(10000);
+    return 0;
+}
+
+void Gui::saveScreenToBmp() const {
     BmpImage pixelBmpImage = CreateBMP(pixels_);
     SaveBMP("test.bmp", pixelBmpImage);
 }
