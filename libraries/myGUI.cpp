@@ -49,7 +49,7 @@ std::unique_ptr<Gui> Gui::create() {
     return std::unique_ptr<Gui>(new Gui());
 }
 
-Gui &Gui::instance() {
+Gui &Gui::createGui() {
     static auto singletonPointer = create();
     return *singletonPointer;
 }
@@ -63,7 +63,7 @@ void Gui::printInternalArray() const {
     }
 }
 
-int Gui::drawSomeStuff() {
+int Gui::DrawRectangle(Point, Point) {
     for (int y = EPD_7IN5_V2_HEIGHT / 2 - 25; y < EPD_7IN5_V2_HEIGHT / 2 + 25; y++) {
         for (int x = 0; x < EPD_7IN5_V2_WIDTH; x++) {
             flipPixel(x, y);

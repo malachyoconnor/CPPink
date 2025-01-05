@@ -6,6 +6,7 @@
 #include <memory>
 #include <GUI_Paint.h>
 #include <myBmpManager.h>
+#include <point.h>
 
 // Each bit is a pixel.
 using PIXEL_ARRAY = std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
@@ -26,11 +27,11 @@ private:
     void flipPixel(int x, int y);
 
 public:
-    static Gui& instance();
+    static Gui& createGui();
     Gui(const Gui&) = delete;
     Gui& operator=(const Gui&) = delete;
 
-    int drawSomeStuff();
+    int DrawRectangle(Point p1, Point p2);
     int drawBMP(BmpImage& image);
     void printInternalArray() const;
     void saveScreenToBmp() const;

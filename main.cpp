@@ -6,10 +6,10 @@
 using namespace std;
 
 int main() {
-    unique_ptr<BmpImage> bmp = OpenBMP("pic/randomTest.bmp");
+    unique_ptr<BmpImage> bmp = OpenBMP("pic/myTestImage.bmp");
 
-    Gui &screenController = Gui::instance();
-    screenController.drawSomeStuff();
+    Gui &screenController = Gui::createGui();
+    // screenController.DrawRectangle();
     screenController.drawBMP(*bmp);
 
     screenController.saveScreenToBmp();

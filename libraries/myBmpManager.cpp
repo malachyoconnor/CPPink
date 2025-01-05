@@ -1,11 +1,9 @@
 #include <iostream>
-#include "myBmpManager.h"
-#include "GUI_BMPfile.h"
+#include <myBmpManager.h>
+#include <GUI_BMPfile.h>
 #include <filesystem>
 #include <fstream>
 #include <vector>
-
-#include "myGUI.h"
 
 using namespace std;
 constexpr uint16_t BMP_SIGNATURE = 'M' << 8 | 'B';
@@ -23,7 +21,7 @@ std::unique_ptr<BmpImage> OpenBMP(filesystem::path path) {
 
     fileStream.read(reinterpret_cast<char *>(&bmpFileHeader), sizeof(BMP_FILE_HEADER));
     fileStream.read(reinterpret_cast<char *>(&bmpInfoHeader), sizeof(BMP_INFO_HEADER));
-    cout << std::hex<< bmpFileHeader.bType << " THAT" << endl;
+    cout << std::hex << bmpFileHeader.bType << " THAT" << endl;
     cout << std::hex << BMP_SIGNATURE << endl;
 
     if (bmpFileHeader.bType != BMP_SIGNATURE) throw std::runtime_error("Image is not a BMP file");
