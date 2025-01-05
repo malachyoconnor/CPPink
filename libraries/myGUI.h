@@ -19,17 +19,20 @@ protected:
 
 private:
     Gui();
-    ~Gui();
     PIXEL_ARRAY pixels_{};
     std::vector<UBYTE> getPixelCopyForScreen();
+    bool DISPLAY_PARTIAL_ENABLED = false;
+    // TODO: Do I need to be storing if I'm in partial update mode
 
 public:
+    ~Gui();
     static Gui& createGui();
     Gui(const Gui&) = delete;
     Gui& operator=(const Gui&) = delete;
 
     void UpdateScreen();
     void PrintInternalArray() const;
+    void UpdatePartOfScreen(Point p1, Point p2);
 
     void DrawBlackPixel(int x, int y);
     void DrawLine(Point p1, Point p2);
@@ -38,6 +41,7 @@ public:
     void DrawRectangleWithoutUpdating(Point p1, Point p2);
     void DrawBMP(BmpImage& image);
 
+    void Sleep(int millis);
     void SaveScreenToBmp() const;
 };
 

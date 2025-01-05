@@ -35,6 +35,21 @@ void Gui::UpdateScreen() {
     DEV_Delay_ms(1000);
 }
 
+void Gui::UpdatePartOfScreen(Point p1, Point p2) {
+    if (not DISPLAY_PARTIAL_ENABLED) {
+        EPD_7IN5_V2_Init_Part();
+        DISPLAY_PARTIAL_ENABLED = true;
+    }
+
+    p1.x = min(p1.x, p2.x);
+    p1.y = min(p1.y, p2.y);
+
+    p2.x = max(p1.x, p2.x);
+    p2.y = max(p1.y, p2.y);
+
+    EPD_7IN5_V2_Display_Part(getPixelCopyForScreen().data(), p1.x, p1.y, p2.x, p2.y);
+}
+
 void Gui::DrawBlackPixel(int x, int y) {
     auto const colByteNumber = x / 8;
     auto const bitNumber = x % 8;
@@ -150,13 +165,17 @@ void Gui::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
 }
 
 void Gui::DrawRectangle(Point topLeft, Point bottomRight) {
-    this->DrawLineWithoutUpdating(topLeft, bottomRight);
+    this->DrawRectangleWithoutUpdating(topLeft, bottomRight);
     this->UpdateScreen();
 }
 
 void Gui::DrawBMP(BmpImage &image) {
     cout << image.data.size() << endl;
     UpdateScreen();
+}
+
+void Gui::Sleep(const int millis) {
+    DEV_Delay_ms(millis);
 }
 
 void Gui::SaveScreenToBmp() const {
