@@ -4,11 +4,12 @@
 #include <filesystem>
 #include <fstream>
 #include <vector>
+#include <array>
 
 using namespace std;
 constexpr uint16_t BMP_SIGNATURE = 'M' << 8 | 'B';
 
-std::unique_ptr<BmpImage> OpenBMP(filesystem::path path) {
+std::unique_ptr<BmpImage> OpenBMP(const filesystem::path &path) {
     if (!exists(path)) {
         cout << "Can't open the file!" << endl;
         throw std::runtime_error("File does not exist");
@@ -39,9 +40,9 @@ std::unique_ptr<BmpImage> OpenBMP(filesystem::path path) {
     // Skip any bytes inbetween the headers and the data
     fileStream.seekg(bmpFileHeader.bOffset, std::ios::beg);
 
-    int imageWidthInBytes = (bmpInfoHeader.biWidth % 8 == 0)
-                                ? (bmpInfoHeader.biWidth / 8)
-                                : (bmpInfoHeader.biWidth / 8 + 1);
+    int imageWidthInBytes = bmpInfoHeader.biWidth % 8 == 0
+                                ? bmpInfoHeader.biWidth / 8
+                                : bmpInfoHeader.biWidth / 8 + 1;
     auto imageBytesToRead = imageWidthInBytes * bmpInfoHeader.biHeight;
 
     // Read the bmp file bytes
@@ -75,7 +76,7 @@ int SaveBMP(const filesystem::path &location, BmpImage &bmpImage) {
 
 BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     const auto bmpFileHeader = BMP_FILE_HEADER{
-        .bType = ('M' << 8) | 'B', // little-endian 0x4D42
+        .bType = BMP_SIGNATURE, // little-endian 0x4D42
         .bSize = 54 + 8 + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT,
         .bReserved1 = 0,
         .bReserved2 = 0,
@@ -83,7 +84,7 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
     };
     const auto bmpInfoHeader = BMP_INFO_HEADER{
         .biInfoSize = 40,
-        .biWidth = (SCREEN_ARRAY_WIDTH) * 8,
+        .biWidth = SCREEN_ARRAY_WIDTH * 8,
         .biHeight = SCREEN_ARRAY_HEIGHT,
         .biPlanes = 1,
         .biBitCount = 1,
@@ -96,14 +97,18 @@ BmpImage CreateBMP(const PIXEL_ARRAY &pixels) {
         .biClrImportant = 0,
     };
 
-    // TODO: This caused an munmap_chunk(): invalid pointer error
-    // vector<char> dataVec = vector<char>(SCREEN_ARRAY_HEIGHT * SCREEN_ARRAY_WIDTH);
-    // ranges::copy_backward(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_HEIGHT * SCREEN_ARRAY_WIDTH, dataVec.data());
+    auto dataVec = vector<UBYTE>(SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT);
+
+    for (auto y=0; y<SCREEN_ARRAY_HEIGHT; y++) {
+        for (auto x=0; x<SCREEN_ARRAY_WIDTH; x++) {
+            dataVec.push_back(pixels.at(y).at(x));
+        }
+    }
 
     return BmpImage{
         bmpFileHeader,
         bmpInfoHeader,
-        vector(&pixels[0][0], &pixels[0][0] + SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT),
+        dataVec,
         COLOUR_TABLE
     };
 }

@@ -18,7 +18,7 @@ using namespace std;
 constexpr unsigned long long COLOUR_TABLE = 0x00FFFFFF00000000;
 
 // Each bit is a pixel.
-constexpr int SCREEN_ARRAY_WIDTH = (EPD_7IN5_V2_WIDTH / 8);
+constexpr int SCREEN_ARRAY_WIDTH = EPD_7IN5_V2_WIDTH / 8;
 constexpr int SCREEN_ARRAY_HEIGHT = EPD_7IN5_V2_HEIGHT;
 using PIXEL_ARRAY = std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
 
@@ -30,7 +30,7 @@ typedef struct {
 } BmpImage;
 
 
-std::unique_ptr<BmpImage> OpenBMP(filesystem::path path);
+std::unique_ptr<BmpImage> OpenBMP(const filesystem::path &path);
 
 int SaveBMP(const filesystem::path &location, BmpImage &bmpImage);
 
@@ -58,7 +58,7 @@ inline void PrintBMP(const unique_ptr<BmpImage> &bmpImage) {
     cout << "biClrUsed: " << bmpInfoHeader.biClrUsed << endl;
     cout << "biClrImportant: " << bmpInfoHeader.biClrImportant << endl;
 
-    for (const char ch: bmpImage->data) {
+    for (const unsigned char ch: bmpImage->data) {
         cout << std::hex << ch;
     }
     cout << endl;

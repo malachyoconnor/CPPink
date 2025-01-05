@@ -30,7 +30,12 @@ vector<UBYTE> Gui::getPixelCopyForScreen() {
     return {&pixels_[0][0], &pixels_[0][0] + (SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT)};
 }
 
-void Gui::flipPixel(int x, int y) {
+void Gui::UpdateScreen() {
+    EPD_7IN5_V2_Display(getPixelCopyForScreen().data());
+    DEV_Delay_ms(1000);
+}
+
+void Gui::DrawBlackPixel(int x, int y) {
     auto const colByteNumber = x / 8;
     auto const bitNumber = x % 8;
     auto const rowByteNumber = y;
@@ -41,7 +46,7 @@ void Gui::flipPixel(int x, int y) {
     }
 
     const UBYTE initialByte = pixels_[rowByteNumber][colByteNumber];
-    const UBYTE finalByte = initialByte & ~(1 << bitNumber);
+    const UBYTE finalByte = initialByte & ~(0x80 >> bitNumber);
     pixels_[rowByteNumber][colByteNumber] = finalByte;
 }
 
@@ -54,7 +59,7 @@ Gui &Gui::createGui() {
     return *singletonPointer;
 }
 
-void Gui::printInternalArray() const {
+void Gui::PrintInternalArray() const {
     for (const auto &row: pixels_) {
         for (const auto &col: row) {
             std::cout << std::bitset<8>(col) << " ";
@@ -63,34 +68,98 @@ void Gui::printInternalArray() const {
     }
 }
 
-int Gui::DrawRectangle(Point, Point) {
-    for (int y = EPD_7IN5_V2_HEIGHT / 2 - 25; y < EPD_7IN5_V2_HEIGHT / 2 + 25; y++) {
-        for (int x = 0; x < EPD_7IN5_V2_WIDTH; x++) {
-            flipPixel(x, y);
+void Gui::DrawLineWithoutUpdating(Point p1, Point p2) {
+    if (p1.y == p2.y) {
+        for (int x = min(p1.x, p2.x); x <= max(p1.x, p2.x); x++) {
+            DrawBlackPixel(x, p1.y);
         }
+        return;
+    }
+    if (p1.x == p2.x) {
+        for (int y = min(p1.y, p2.y); y <= max(p1.y, p2.y); y++) {
+            DrawBlackPixel(p1.x, y);
+        }
+        return;
     }
 
-    for (int x = EPD_7IN5_V2_WIDTH / 2 - 25; x < EPD_7IN5_V2_WIDTH / 2 + 25; x++) {
-        for (int y = 0; y < EPD_7IN5_V2_HEIGHT - 30; y++) {
-            flipPixel(x, y);
+    const double M = (static_cast<double>(p2.y) - static_cast<double>(p1.y)) /
+                     (static_cast<double>(p2.x) - static_cast<double>(p1.x));
+    const double C = static_cast<double>(p1.y) - M * static_cast<double>(p1.x);
+
+    int dx = abs(p2.x - p1.x);
+    int dy = abs(p2.y - p1.y);
+
+    if (dx > dy) {
+        int startX=p1.x, startY=p1.y, endX=p2.x;
+        if (p1.x > p2.x) {
+            std::swap(startX, endX);
+            startY = p2.y;
+        }
+
+        double currY = startY;
+        for (int x = startX; x <= endX; x++) {
+            DrawBlackPixel(x, static_cast<int>(currY));
+
+            const double perfectY = M * x + C;
+            while (abs(perfectY - currY) >= 1 - numeric_limits<double>::epsilon()) {
+                if (perfectY - currY > 0) {
+                    currY += 1;
+                } else {
+                    currY -= 1;
+                }
+                DrawBlackPixel(x, static_cast<int>(currY));
+            }
+        }
+    } else {
+        int startX=p1.x, startY=p1.y, endY=p2.y;
+        if (p1.y > p2.y) {
+            std::swap(startY, endY);
+            startX = p2.x;
+        }
+
+        double currX = startX;
+        for (int y = startY; y <= endY; y++) {
+            DrawBlackPixel(static_cast<int>(currX), y);
+
+            const double perfectX = (y - C) / M;
+            while (abs(perfectX - currX) >= 1 - numeric_limits<double>::epsilon()) {
+                if (perfectX - currX >= 0) {
+                    currX += 1;
+                } else {
+                    currX -= 1;
+                }
+                DrawBlackPixel(static_cast<int>(currX), y);
+            }
         }
     }
-
-    EPD_7IN5_V2_Display(getPixelCopyForScreen().data());
-    DEV_Delay_ms(5000);
-
-    return 0;
 }
 
-int Gui::drawBMP(BmpImage &image) {
+void Gui::DrawLine(const Point p1, const Point p2) {
+    this->DrawLineWithoutUpdating(p1, p2);
+    UpdateScreen();
+}
+
+void Gui::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
+    auto topRight = Point(bottomRight.x, topLeft.y);
+    auto bottomLeft = Point(topLeft.x, bottomRight.y);
+
+    this->DrawLineWithoutUpdating(topLeft, topRight);
+    this->DrawLineWithoutUpdating(topRight, bottomRight);
+    this->DrawLineWithoutUpdating(bottomRight, bottomLeft);
+    this->DrawLineWithoutUpdating(bottomLeft, topLeft);
+}
+
+void Gui::DrawRectangle(Point topLeft, Point bottomRight) {
+    this->DrawLineWithoutUpdating(topLeft, bottomRight);
+    this->UpdateScreen();
+}
+
+void Gui::DrawBMP(BmpImage &image) {
     cout << image.data.size() << endl;
-
-    EPD_7IN5_V2_Display(image.data.data());
-    DEV_Delay_ms(10000);
-    return 0;
+    UpdateScreen();
 }
 
-void Gui::saveScreenToBmp() const {
+void Gui::SaveScreenToBmp() const {
     BmpImage pixelBmpImage = CreateBMP(pixels_);
     SaveBMP("test.bmp", pixelBmpImage);
 }

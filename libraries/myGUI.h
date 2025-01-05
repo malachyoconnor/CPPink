@@ -1,10 +1,8 @@
 #ifndef MYGUI_H
 #define MYGUI_H
 #include <array>
-#include <EPD_7in5_V2.h>
 #include <vector>
 #include <memory>
-#include <GUI_Paint.h>
 #include <myBmpManager.h>
 #include <point.h>
 
@@ -24,17 +22,23 @@ private:
     ~Gui();
     PIXEL_ARRAY pixels_{};
     std::vector<UBYTE> getPixelCopyForScreen();
-    void flipPixel(int x, int y);
 
 public:
     static Gui& createGui();
     Gui(const Gui&) = delete;
     Gui& operator=(const Gui&) = delete;
 
-    int DrawRectangle(Point p1, Point p2);
-    int drawBMP(BmpImage& image);
-    void printInternalArray() const;
-    void saveScreenToBmp() const;
+    void UpdateScreen();
+    void PrintInternalArray() const;
+
+    void DrawBlackPixel(int x, int y);
+    void DrawLine(Point p1, Point p2);
+    void DrawLineWithoutUpdating(Point p1, Point p2);
+    void DrawRectangle(Point topLeft, Point bottomRight);
+    void DrawRectangleWithoutUpdating(Point p1, Point p2);
+    void DrawBMP(BmpImage& image);
+
+    void SaveScreenToBmp() const;
 };
 
 #endif //MYGUI_H
