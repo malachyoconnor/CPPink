@@ -14,20 +14,8 @@ int main() {
     signal(SIGINT, exit);
 
     Gui &screenController = Gui::createGui();
-    screenController.UpdatePartOfScreen({0, 0}, {400, 400});
 
-    for (int i = 0; i < 10; i++) {
-        screenController.DrawRectangleWithoutUpdating({i*10, i*10}, {400 - i*10, 400-i*10});
-        screenController.Sleep(500);
-        cout << i << endl;
-    }
-
-    screenController.DrawRectangleWithoutUpdating({10, 10}, {700, 400});
-
-    screenController.UpdatePartOfScreen({0, 0}, {400, 400});
-    screenController.Sleep(5000);
-
+    screenController.DrawText("TESTING - Does this work? Seems so.", {150, 150});
     screenController.UpdateScreen();
-
     screenController.Sleep(5000);
 }

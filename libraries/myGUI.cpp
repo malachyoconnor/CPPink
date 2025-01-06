@@ -4,6 +4,8 @@
 #include <system_error>
 #include <bitset>
 
+#include "fonts.h"
+
 Gui::Gui() {
     cout << "Initializing GUI" << endl;
     if (DEV_Module_Init() != 0) {
@@ -31,6 +33,11 @@ vector<UBYTE> Gui::getPixelCopyForScreen() {
 }
 
 void Gui::UpdateScreen() {
+    if (DISPLAY_PARTIAL_ENABLED) {
+        EPD_7IN5_V2_Init();
+        DISPLAY_PARTIAL_ENABLED = false;
+    }
+
     EPD_7IN5_V2_Display(getPixelCopyForScreen().data());
     DEV_Delay_ms(1000);
 }
@@ -41,13 +48,12 @@ void Gui::UpdatePartOfScreen(Point p1, Point p2) {
         DISPLAY_PARTIAL_ENABLED = true;
     }
 
-    p1.x = min(p1.x, p2.x);
-    p1.y = min(p1.y, p2.y);
+    Point topLeft = Point::PointMinimums(p1, p2);
+    Point bottomRight = Point::PointMaximums(p1, p2);
 
-    p2.x = max(p1.x, p2.x);
-    p2.y = max(p1.y, p2.y);
-
-    EPD_7IN5_V2_Display_Part(getPixelCopyForScreen().data(), p1.x, p1.y, p2.x, p2.y);
+    EPD_7IN5_V2_Display_Part(getPixelCopyForScreen().data(),
+                             topLeft.x, topLeft.y,
+                             bottomRight.x, bottomRight.y);
 }
 
 void Gui::DrawBlackPixel(int x, int y) {
@@ -105,7 +111,7 @@ void Gui::DrawLineWithoutUpdating(Point p1, Point p2) {
     int dy = abs(p2.y - p1.y);
 
     if (dx > dy) {
-        int startX=p1.x, startY=p1.y, endX=p2.x;
+        int startX = p1.x, startY = p1.y, endX = p2.x;
         if (p1.x > p2.x) {
             std::swap(startX, endX);
             startY = p2.y;
@@ -126,7 +132,7 @@ void Gui::DrawLineWithoutUpdating(Point p1, Point p2) {
             }
         }
     } else {
-        int startX=p1.x, startY=p1.y, endY=p2.y;
+        int startX = p1.x, startY = p1.y, endY = p2.y;
         if (p1.y > p2.y) {
             std::swap(startY, endY);
             startX = p2.x;
@@ -155,6 +161,9 @@ void Gui::DrawLine(const Point p1, const Point p2) {
 }
 
 void Gui::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
+    topLeft = Point::PointMinimums(topLeft, bottomRight);
+    bottomRight = Point::PointMaximums(topLeft, bottomRight);
+
     auto topRight = Point(bottomRight.x, topLeft.y);
     auto bottomLeft = Point(topLeft.x, bottomRight.y);
 
@@ -169,6 +178,53 @@ void Gui::DrawRectangle(Point topLeft, Point bottomRight) {
     this->UpdateScreen();
 }
 
+BoundingBox Gui::DrawChar(char toDraw, Point bottomLeftBoundary) {
+    cout << bottomLeftBoundary << endl;
+    cout << SCREEN_BOUNDS.topLeft << " " << SCREEN_BOUNDS.bottomRight << endl;
+
+    if (not SCREEN_BOUNDS.contains(bottomLeftBoundary) or
+        not SCREEN_BOUNDS.contains(bottomLeftBoundary + Point{Font24.Width, 0})) {
+        throw std::runtime_error("Trying to draw a character out of bounds!");
+    }
+
+    auto [fontTable, fontWidth, fontHeight] = Font24;
+
+    Point topLeftBoundary = {bottomLeftBoundary.x, bottomLeftBoundary.y + fontHeight};
+    uint32_t Char_Offset = (toDraw - ' ') * fontHeight * (fontWidth / 8 + (fontWidth % 8 ? 1 : 0));
+
+    const unsigned char *ptr = &fontTable[Char_Offset];
+
+    for (UWORD Page = 0; Page < fontHeight; Page++) {
+        for (UWORD Column = 0; Column < fontWidth; Column++) {
+            if (*ptr & (0x80 >> (Column % 8)))
+                this->DrawBlackPixel(topLeftBoundary.x + Column, topLeftBoundary.y + Page);
+            //One pixel is 8 bits
+            if (Column % 8 == 7)
+                ptr++;
+        } // Write a line
+        if (fontWidth % 8 != 0)
+            ptr++;
+    }
+
+    return {
+        topLeftBoundary,
+        {bottomLeftBoundary.x + fontWidth, bottomLeftBoundary.y}
+    };
+}
+
+BoundingBox Gui::DrawText(string stringToDraw, Point bottomLeftBoundary) {
+    Point currentBottomLeft = bottomLeftBoundary;
+    for (char charToDraw: stringToDraw) {
+        BoundingBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
+        currentBottomLeft.x = resultBoundary.bottomRight.x;
+    }
+
+    return {
+        {bottomLeftBoundary.x, bottomLeftBoundary.y + Font24.Height},
+        {static_cast<int>(bottomLeftBoundary.x + stringToDraw.size() * Font24.Width), bottomLeftBoundary.y}
+    };
+}
+
 void Gui::DrawBMP(BmpImage &image) {
     cout << image.data.size() << endl;
     UpdateScreen();
@@ -178,7 +234,7 @@ void Gui::Sleep(const int millis) {
     DEV_Delay_ms(millis);
 }
 
-void Gui::SaveScreenToBmp() const {
+void Gui::SaveScreenToBmp(filesystem::path &path) const {
     BmpImage pixelBmpImage = CreateBMP(pixels_);
-    SaveBMP("test.bmp", pixelBmpImage);
+    SaveBMP(path, pixelBmpImage);
 }
