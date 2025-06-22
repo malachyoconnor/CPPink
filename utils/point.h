@@ -1,7 +1,7 @@
 #ifndef POINT_H
 #define POINT_H
 
-struct BoundingBox;
+struct BoundaryBox;
 
 class Point {
 public:
@@ -47,7 +47,7 @@ public:
         return output_stream;
     }
 
-    bool withinBounds(BoundingBox bounds) const;
+    bool withinBounds(BoundaryBox bounds) const;
 
     static Point PointMaximums(Point p1, Point p2) {
         return {max(p1.x, p2.x), max(p1.y, p2.y)};

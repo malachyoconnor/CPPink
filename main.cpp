@@ -1,13 +1,11 @@
 #include <myBmpManager.h>
-#include <myGUI.h>
+// #include <myGUI.h>
+#include <testGUI.h>
 
 #include <csignal>
 #include <format>
 #include <random>
 
-// Randomness settings
-std::random_device rd;
-std::mt19937 gen(rd());
 using namespace std;
 
 std::string update() {
@@ -31,17 +29,15 @@ int main() {
 
     try
     {
-        Gui& screenController = Gui::createGui();
+        BaseGUI& screenController = TestGui::createGui();
 
-        screenController.DrawText(update(), {0, 0});
-        screenController.DrawText(update(), {50, 50});
-        screenController.DrawText(update(), {200, 100});
-        screenController.DrawText("TESTING - Does this work? Seems so.", {150, 150});
+        screenController.DrawLine({0, 0}, {50, 100});
 
-        screenController.UpdateScreen();
-        // screenController.UpdatePartOfScreen({0, 0}, {200, 200});
+        screenController.DrawText_(update(), {30, 30});
+        screenController.DrawText_(update(), {50, 50});
+        screenController.DrawText_(update(), {200, 100});
+        screenController.DrawText_("TESTING - Does this work? Seems so.", {150, 150});
 
-        // screenController.Sleep(5000);
     }
     catch (std::exception& e)
     {

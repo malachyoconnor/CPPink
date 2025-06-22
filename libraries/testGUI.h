@@ -3,48 +3,44 @@
 
 #include <array>
 #include <memory>
+#include <thread>
 #include <vector>
 
 #include "baseGUI.h"
-#include "myBmpManager.h"
 #include "point.h"
 #include "bounding_box.h"
 
-// Each bit is a pixel.
-using PIXEL_ARRAY =
-std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
-constexpr int TOTAL_SCREEN_BYTES = SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT;
 const BoundaryBox SCREEN_BOUNDS = {
     {0, 0},
     {EPD_7IN5_V2_WIDTH, EPD_7IN5_V2_HEIGHT}
 };
 
-class Gui : public BaseGUI {
-    friend struct std::default_delete<Gui>;
-    friend struct std::unique_ptr<Gui>;
+class TestGui : public BaseGUI {
+    friend struct std::default_delete<TestGui>;
+    friend struct std::unique_ptr<TestGui>;
 
 protected:
-    static std::unique_ptr<Gui> create();
+    static std::unique_ptr<TestGui> create();
 
 private:
-    Gui();
-
-    PIXEL_ARRAY pixels_{};
-
-    std::vector<UBYTE> getPixelCopyForScreen();
-
-    bool DISPLAY_PARTIAL_ENABLED = false;
+    TestGui();
+    std::array<std::array<UBYTE, EPD_7IN5_V2_WIDTH>, EPD_7IN5_V2_HEIGHT> pixels_{};
+    std::mutex pixels_lock{};
 
     BoundaryBox DrawChar(char toDraw, Point bottomLeft);
 
+    void raylibScreenManager();
+    std::thread screen_thread;
+    std::atomic_bool screen_changed = false;
+
 public:
-    ~Gui();
+    ~TestGui();
 
-    static Gui& createGui();
+    static TestGui& createGui();
 
-    Gui(const Gui&) = delete;
+    TestGui(const TestGui&) = delete;
 
-    Gui& operator=(const Gui&) = delete;
+    TestGui& operator=(const TestGui&) = delete;
 
     void UpdateScreen();
 

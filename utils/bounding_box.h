@@ -4,16 +4,16 @@
 #include <point.h>
 #include <ostream>
 
-struct BoundingBox {
+struct BoundaryBox {
    Point bottomLeft;
    Point topRight;
 
-   bool contains(const Point x) const {
-      return bottomLeft <= x && x < topRight;
+   bool contains(const Point p) const {
+      return bottomLeft <= p && p < topRight;
    }
 
    friend std::ostream &operator<<(std::ostream &output_stream,
-                                   BoundingBox &bounding_box) {
+                                   BoundaryBox &bounding_box) {
       output_stream << "Bottom left: " << bounding_box.bottomLeft
                     << " Top right: " << bounding_box.topRight;
       return output_stream;

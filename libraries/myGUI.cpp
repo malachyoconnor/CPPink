@@ -49,21 +49,22 @@ void Gui::UpdateScreen() {
     DEV_Delay_ms(1000);
 }
 
-void Gui::UpdatePartOfScreen(Point bottomLeft, Point topRight) {
-    if (not DISPLAY_PARTIAL_ENABLED)
-    {
-        EPD_7IN5_V2_Init_Part();
-        DISPLAY_PARTIAL_ENABLED = true;
-    }
-
-    if (not(bottomLeft <= topRight))
-    {
-        throw logic_error("Error: Bounding box for UpdatePartOfScreen invalid.");
-    }
-
-    EPD_7IN5_V2_Display_Part(getPixelCopyForScreen().data(), bottomLeft.x,
-                             topRight.y, topRight.x, bottomLeft.y);
-}
+// TODO: This needs fixing
+// void Gui::UpdatePartOfScreen(Point bottomLeft, Point topRight) {
+//     if (not DISPLAY_PARTIAL_ENABLED)
+//     {
+//         EPD_7IN5_V2_Init_Part();
+//         DISPLAY_PARTIAL_ENABLED = true;
+//     }
+//
+//     if (not(bottomLeft <= topRight))
+//     {
+//         throw logic_error("Error: Bounding box for UpdatePartOfScreen invalid.");
+//     }
+//
+//     EPD_7IN5_V2_Display_Part(getPixelCopyForScreen().data(), bottomLeft.x,
+//                              topRight.y, topRight.x, bottomLeft.y);
+// }
 
 void Gui::DrawBlackPixel(int x, int y) {
     auto const colByteNumber = x / 8;
@@ -210,7 +211,7 @@ void Gui::DrawRectangle(Point topLeft, Point bottomRight) {
     this->UpdateScreen();
 }
 
-BoundingBox Gui::DrawChar(char toDraw, Point bottomLeft) {
+BoundaryBox Gui::DrawChar(char toDraw, Point bottomLeft) {
     if (not SCREEN_BOUNDS.contains(bottomLeft) or
         not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0}))
     {
@@ -245,11 +246,11 @@ BoundingBox Gui::DrawChar(char toDraw, Point bottomLeft) {
     return {topLeftBoundary, {bottomLeft.x + fontWidth, bottomLeft.y}};
 }
 
-BoundingBox Gui::DrawText(string stringToDraw, Point bottomLeftBoundary) {
+BoundaryBox Gui::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
     Point currentBottomLeft = bottomLeftBoundary;
     for (char charToDraw : stringToDraw)
     {
-        BoundingBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
+        BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
         currentBottomLeft.x = resultBoundary.topRight.x;
     }
 

@@ -21,8 +21,7 @@ constexpr unsigned long long COLOUR_TABLE = 0x00FFFFFF00000000;
 // Each bit is a pixel.
 constexpr int SCREEN_ARRAY_WIDTH = EPD_7IN5_V2_WIDTH / 8;
 constexpr int SCREEN_ARRAY_HEIGHT = EPD_7IN5_V2_HEIGHT;
-using PIXEL_ARRAY =
-    std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
+using PIXEL_ARRAY = std::array<std::array<UBYTE, SCREEN_ARRAY_WIDTH>, SCREEN_ARRAY_HEIGHT>;
 
 typedef struct {
    BMP_FILE_HEADER bmpFileHeader;
