@@ -30,13 +30,13 @@ typedef struct {
    unsigned long long colourTable = COLOUR_TABLE;
 } BmpImage;
 
-std::unique_ptr<BmpImage> OpenBMP(const filesystem::path &path);
+std::unique_ptr<BmpImage> OpenBMP(const filesystem::path& path);
 
-int SaveBMP(const filesystem::path &location, BmpImage &bmpImage);
+int SaveBMP(const filesystem::path& location, BmpImage& bmpImage);
 
-BmpImage CreateBMP(const PIXEL_ARRAY &pixels);
+BmpImage CreateBMP(const PIXEL_ARRAY& pixels);
 
-inline void PrintBMP(const unique_ptr<BmpImage> &bmpImage) {
+inline void PrintBMP(const unique_ptr<BmpImage>& bmpImage) {
    BMP_FILE_HEADER bmpFileHeader = bmpImage->bmpFileHeader;
    BMP_INFO_HEADER bmpInfoHeader = bmpImage->bmpInfoHeader;
 
