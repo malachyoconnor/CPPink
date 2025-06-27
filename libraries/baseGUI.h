@@ -10,6 +10,7 @@ public:
    // Fundamental
    virtual void PrintInternalArray() const = 0;
    virtual void UpdateScreen() = 0;
+   virtual void ClearScreen() = 0;
 
    // Drawing methods
    virtual void DrawBlackPixel(int x, int y) = 0;

@@ -48,6 +48,8 @@ public:
 
    void UpdateScreen();
 
+   void ClearScreen();
+
    void PrintInternalArray() const;
 
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);

@@ -47,6 +47,15 @@ void Gui::UpdateScreen() {
    DEV_Delay_ms(1000);
 }
 
+void Gui::ClearScreen() {
+   for (auto& arr : pixels_) {
+      for (auto& ch : arr) {
+         ch = 255;
+      }
+   }
+}
+
+
 // TODO: This needs fixing
 // void Gui::UpdatePartOfScreen(Point bottomLeft, Point topRight) {
 //     if (not DISPLAY_PARTIAL_ENABLED)

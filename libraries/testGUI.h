@@ -25,8 +25,6 @@ protected:
 private:
    TestGui();
    std::array<std::array<UBYTE, EPD_7IN5_V2_WIDTH>, EPD_7IN5_V2_HEIGHT> pixels_{};
-   std::mutex pixels_lock{};
-
    BoundaryBox DrawChar(char toDraw, Point bottomLeft);
 
    void raylibScreenManager();
@@ -43,6 +41,8 @@ public:
    TestGui& operator=(const TestGui&) = delete;
 
    void UpdateScreen();
+
+   void ClearScreen();
 
    void PrintInternalArray() const;
 

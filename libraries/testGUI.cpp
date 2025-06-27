@@ -27,26 +27,24 @@ void TestGui::raylibScreenManager() {
    InitWindow(width, height, "Hello");
 
    while (!WindowShouldClose()) {
-      BeginDrawing();
-      // ClearBackground(WHITE);
-      pixels_lock.lock();
+      if (screen_changed.exchange(false)) {
+         BeginDrawing();
 
-      for (int x = 0; x < width; ++x) {
-         for (int y = 0; y < height; ++y) {
-            DrawPixel(x, y, pixels_[y][x] == 0 ? WHITE : BLACK);
+         for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+               DrawPixel(x, y, pixels_[y][x] == 0 ? WHITE : BLACK);
+            }
          }
+
+         EndDrawing();
       }
-
-      EndDrawing();
-      pixels_lock.unlock();
-
       Sleep(1000 / FPS);
    }
 }
 
 
 TestGui::~TestGui() {
-   screen_thread.join();
+   CloseWindow();
 }
 
 TestGui& TestGui::createGui() {
@@ -58,13 +56,19 @@ void TestGui::UpdateScreen() {
    this->screen_changed.exchange(true);
 }
 
+void TestGui::ClearScreen() {
+   for (auto& arr : pixels_) {
+      for (auto& ch : arr) {
+         ch = 0;
+      }
+   }
+}
+
 void TestGui::PrintInternalArray() const {
 }
 
 void TestGui::DrawBlackPixel(int x, int y) {
-   pixels_lock.lock();
    pixels_[y][x] = 255;
-   pixels_lock.unlock();
 }
 
 void TestGui::DrawLine(Point p1, Point p2) {
@@ -84,8 +88,6 @@ void TestGui::DrawLineWithoutUpdating(Point p1, Point p2) {
    while (SCREEN_BOUNDS.contains(p1 + diff) && p1 <= p2) {
       p1 = p1 + diff;
       DrawBlackPixel(p1.x, p1.y);
-
-      std::cout << p1.x << " " << p1.y << std::endl;
    }
 }
 
