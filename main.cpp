@@ -3,9 +3,9 @@
 #include <fstream>
 #include <random>
 
-#include "myBmpManager.h"
+#include "bmpManager.h"
 #include "helper_funcs.h"
-#include "testGUI.h"
+#include "testScreenController.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main() {
    signal(SIGINT, exit);
 
    try {
-      BaseGUI& screenController = TestGui::createGui();
+      BaseScreenController& screenController = TestScreenController::createGui();
 
       screenController.DrawLine({0, 0}, {50, 100});
 
@@ -22,8 +22,10 @@ int main() {
          screenController.ClearScreen();
          auto l = get_weather();
 
-         for (int i = 0; i < l.size(); ++i) {
-            screenController.DrawText_(l[i], {150, 150 + 24 * i});
+         screenController.DrawText_(get_time(),{5, 5});
+
+         for (size_t i = 0; i < l.size(); ++i) {
+            screenController.DrawText_(l[i], {150, static_cast<int>(150 + 24 * i)});
          }
 
          screenController.UpdateScreen();

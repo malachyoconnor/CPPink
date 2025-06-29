@@ -1,11 +1,11 @@
 #ifndef BASEGUI_H
 #define BASEGUI_H
-#include "myBmpManager.h"
+#include "bmpManager.h"
 #include "point.h"
 
-class BaseGUI {
+class BaseScreenController {
 public:
-   virtual ~BaseGUI() = default;
+   virtual ~BaseScreenController() = default;
 
    // Fundamental
    virtual void PrintInternalArray() const = 0;

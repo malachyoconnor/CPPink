@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "EPD_7in5_V2.h"
-#include "myBmpManager.h"
+#include "bmpManager.h"
 
 using namespace std;
 

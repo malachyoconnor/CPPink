@@ -19,7 +19,7 @@ add_subdirectory(libraries)
 add_subdirectory(utils)
 add_subdirectory(raylib)
 
-target_link_libraries(CPPink PUBLIC myGUI)
+target_link_libraries(CPPink PUBLIC screenController)
 target_link_libraries(CPPink PUBLIC ePaper)
 target_link_libraries(CPPink PUBLIC GUI)
 target_link_libraries(CPPink PUBLIC config)

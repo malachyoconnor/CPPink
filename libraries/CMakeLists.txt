@@ -1,11 +1,11 @@
-add_library(myGUI myGUI.h myGUI.cpp testGUI.h testGUI.cpp)
-target_include_directories(myGUI PUBLIC
+add_library(screenController screenController.h screenController.cpp testScreenController.h testScreenController.cpp)
+target_include_directories(screenController PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/utils
         ${CMAKE_SOURCE_DIR}/raylib
 )
-target_link_libraries(myGUI PUBLIC config ePaper fonts GUI examples myBmpManager utils raylib)
+target_link_libraries(screenController PUBLIC config ePaper fonts GUI examples bmpManager utils raylib)
 
-add_library(myBmpManager myBmpManager.cpp myBmpManager.h)
-target_include_directories(myBmpManager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(myBmpManager PRIVATE ePaper fonts GUI)
+add_library(bmpManager bmpManager.cpp bmpManager.h)
+target_include_directories(bmpManager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(bmpManager PRIVATE ePaper fonts GUI)

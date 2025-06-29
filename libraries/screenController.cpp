@@ -1,4 +1,4 @@
-#include "myGUI.h"
+#include "screenController.h"
 
 #include <bitset>
 #include <iostream>
@@ -6,9 +6,9 @@
 #include <format>
 
 #include "fonts.h"
-#include "myBmpManager.h"
+#include "bmpManager.h"
 
-Gui::Gui() {
+ScreenController::ScreenController() {
    cout << "Initializing GUI" << endl;
    if (DEV_Module_Init() != 0) {
       throw std::system_error(errno, std::system_category());
@@ -19,7 +19,7 @@ Gui::Gui() {
    fill_n(&pixels_[0][0], SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT, 0xFF);
 }
 
-Gui::~Gui() {
+ScreenController::~ScreenController() {
    std::cout << "Powering down" << std::endl;
    EPD_7IN5_V2_Init();
    EPD_7IN5_V2_Clear();
@@ -30,14 +30,14 @@ Gui::~Gui() {
    DEV_Module_Exit();
 }
 
-vector<UBYTE> Gui::getPixelCopyForScreen() {
+vector<UBYTE> ScreenController::getPixelCopyForScreen() {
    return {
       &pixels_[0][0],
       &pixels_[0][0] + (SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT)
    };
 }
 
-void Gui::UpdateScreen() {
+void ScreenController::UpdateScreen() {
    if (DISPLAY_PARTIAL_ENABLED) {
       EPD_7IN5_V2_Init();
       DISPLAY_PARTIAL_ENABLED = false;
@@ -47,7 +47,7 @@ void Gui::UpdateScreen() {
    DEV_Delay_ms(1000);
 }
 
-void Gui::ClearScreen() {
+void ScreenController::ClearScreen() {
    for (auto& arr : pixels_) {
       for (auto& ch : arr) {
          ch = 255;
@@ -73,7 +73,7 @@ void Gui::ClearScreen() {
 //                              topRight.y, topRight.x, bottomLeft.y);
 // }
 
-void Gui::DrawBlackPixel(int x, int y) {
+void ScreenController::DrawBlackPixel(int x, int y) {
    auto const colByteNumber = x / 8;
    auto const bitNumber = x % 8;
    auto const rowByteNumber = y;
@@ -89,14 +89,14 @@ void Gui::DrawBlackPixel(int x, int y) {
    pixels_[rowByteNumber][colByteNumber] = finalByte;
 }
 
-std::unique_ptr<Gui> Gui::create() { return std::unique_ptr<Gui>(new Gui()); }
+std::unique_ptr<ScreenController> ScreenController::create() { return std::unique_ptr<ScreenController>(new ScreenController()); }
 
-Gui& Gui::createGui() {
+ScreenController& ScreenController::createGui() {
    static auto singletonPointer = create();
    return *singletonPointer;
 }
 
-void Gui::PrintInternalArray() const {
+void ScreenController::PrintInternalArray() const {
    for (const auto& row : pixels_) {
       for (const auto& col : row) {
          std::cout << std::bitset<8>(col) << " ";
@@ -105,7 +105,7 @@ void Gui::PrintInternalArray() const {
    }
 }
 
-void Gui::DrawLineWithoutUpdating(Point p1, Point p2) {
+void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
    if (p1.y == p2.y) {
       for (int x = min(p1.x, p2.x); x <= max(p1.x, p2.x); x++) {
          DrawBlackPixel(x, p1.y);
@@ -176,12 +176,12 @@ void Gui::DrawLineWithoutUpdating(Point p1, Point p2) {
    }
 }
 
-void Gui::DrawLine(const Point p1, const Point p2) {
+void ScreenController::DrawLine(const Point p1, const Point p2) {
    this->DrawLineWithoutUpdating(p1, p2);
    UpdateScreen();
 }
 
-void Gui::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
+void ScreenController::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
    topLeft = Point::PointMinimums(topLeft, bottomRight);
    bottomRight = Point::PointMaximums(topLeft, bottomRight);
 
@@ -194,12 +194,12 @@ void Gui::DrawRectangleWithoutUpdating(Point topLeft, Point bottomRight) {
    this->DrawLineWithoutUpdating(bottomLeft, topLeft);
 }
 
-void Gui::DrawRectangle(Point topLeft, Point bottomRight) {
+void ScreenController::DrawRectangle(Point topLeft, Point bottomRight) {
    this->DrawRectangleWithoutUpdating(topLeft, bottomRight);
    this->UpdateScreen();
 }
 
-BoundaryBox Gui::DrawChar(char toDraw, Point bottomLeft) {
+BoundaryBox ScreenController::DrawChar(char toDraw, Point bottomLeft) {
    if (not SCREEN_BOUNDS.contains(bottomLeft) or
       not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
       throw std::runtime_error(std::format(
@@ -231,7 +231,7 @@ BoundaryBox Gui::DrawChar(char toDraw, Point bottomLeft) {
    return {topLeftBoundary, {bottomLeft.x + fontWidth, bottomLeft.y}};
 }
 
-BoundaryBox Gui::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
+BoundaryBox ScreenController::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
    for (char charToDraw : stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
@@ -248,14 +248,14 @@ BoundaryBox Gui::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
    };
 }
 
-void Gui::DrawBMP(BmpImage& image) {
+void ScreenController::DrawBMP(BmpImage& image) {
    cout << image.data.size() << endl;
    UpdateScreen();
 }
 
-void Gui::Sleep(const int millis) { DEV_Delay_ms(millis); }
+void ScreenController::Sleep(const int millis) { DEV_Delay_ms(millis); }
 
-void Gui::SaveScreenToBmp(filesystem::path& path) const {
+void ScreenController::SaveScreenToBmp(filesystem::path& path) const {
    BmpImage pixelBmpImage = CreateBMP(pixels_);
    SaveBMP(path, pixelBmpImage);
 }

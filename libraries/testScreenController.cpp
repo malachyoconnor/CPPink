@@ -1,4 +1,4 @@
-#include "testGUI.h"
+#include "testScreenController.h"
 
 #include <format>
 #include <numeric>
@@ -10,18 +10,18 @@
 
 constexpr int FPS = 60;
 
-std::unique_ptr<TestGui> TestGui::create() {
-   return unique_ptr<TestGui>(new TestGui());
+std::unique_ptr<TestScreenController> TestScreenController::create() {
+   return unique_ptr<TestScreenController>(new TestScreenController());
 }
 
-TestGui::TestGui() {
-   screen_thread = std::thread(&TestGui::raylibScreenManager, this);
+TestScreenController::TestScreenController() {
+   screen_thread = std::thread(&TestScreenController::raylibScreenManager, this);
 
    while (!IsWindowReady()) {
    }
 }
 
-void TestGui::raylibScreenManager() {
+void TestScreenController::raylibScreenManager() {
    const int width = EPD_7IN5_V2_WIDTH;
    const int height = EPD_7IN5_V2_HEIGHT;
    InitWindow(width, height, "Hello");
@@ -43,20 +43,20 @@ void TestGui::raylibScreenManager() {
 }
 
 
-TestGui::~TestGui() {
+TestScreenController::~TestScreenController() {
    CloseWindow();
 }
 
-TestGui& TestGui::createGui() {
+TestScreenController& TestScreenController::createGui() {
    static auto singletonPointer = create();
    return *singletonPointer;
 }
 
-void TestGui::UpdateScreen() {
+void TestScreenController::UpdateScreen() {
    this->screen_changed.exchange(true);
 }
 
-void TestGui::ClearScreen() {
+void TestScreenController::ClearScreen() {
    for (auto& arr : pixels_) {
       for (auto& ch : arr) {
          ch = 0;
@@ -64,20 +64,20 @@ void TestGui::ClearScreen() {
    }
 }
 
-void TestGui::PrintInternalArray() const {
+void TestScreenController::PrintInternalArray() const {
 }
 
-void TestGui::DrawBlackPixel(int x, int y) {
+void TestScreenController::DrawBlackPixel(int x, int y) {
    pixels_[y][x] = 255;
 }
 
-void TestGui::DrawLine(Point p1, Point p2) {
+void TestScreenController::DrawLine(Point p1, Point p2) {
    // TODO: Do proper line-drawing
    DrawLineWithoutUpdating(p1, p2);
    UpdateScreen();
 }
 
-void TestGui::DrawLineWithoutUpdating(Point p1, Point p2) {
+void TestScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
    auto diff = p2 - p1;
 
    const auto gcd = std::gcd(diff.x, diff.y);
@@ -91,16 +91,16 @@ void TestGui::DrawLineWithoutUpdating(Point p1, Point p2) {
    }
 }
 
-void TestGui::DrawRectangle(Point topLeft, Point bottomRight) {
+void TestScreenController::DrawRectangle(Point topLeft, Point bottomRight) {
 }
 
-void TestGui::DrawRectangleWithoutUpdating(Point p1, Point p2) {
+void TestScreenController::DrawRectangleWithoutUpdating(Point p1, Point p2) {
 }
 
-void TestGui::DrawBMP(BmpImage& image) {
+void TestScreenController::DrawBMP(BmpImage& image) {
 }
 
-BoundaryBox TestGui::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
+BoundaryBox TestScreenController::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
    for (char charToDraw : stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
@@ -117,14 +117,14 @@ BoundaryBox TestGui::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
    };
 }
 
-void TestGui::Sleep(int millis) {
+void TestScreenController::Sleep(int millis) {
    std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 }
 
-void TestGui::SaveScreenToBmp(filesystem::path& path) const {
+void TestScreenController::SaveScreenToBmp(filesystem::path& path) const {
 }
 
-BoundaryBox TestGui::DrawChar(char toDraw, Point bottomLeft) {
+BoundaryBox TestScreenController::DrawChar(char toDraw, Point bottomLeft) {
    if (not SCREEN_BOUNDS.contains(bottomLeft) or
       not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
       throw std::runtime_error(std::format(

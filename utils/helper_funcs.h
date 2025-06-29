@@ -5,21 +5,21 @@
 #include <string>
 #include <vector>
 
-#include "baseGUI.h"
+#include "BaseScreenController.h"
 
 inline std::string get_time() {
    // Epoch was 01 Jan 1970
-   auto seconds_since_epoch =
+   const auto seconds_since_epoch =
       chrono::system_clock::now().time_since_epoch().count() /
       1'000'000'000;
 
-   auto seconds_into_today = seconds_since_epoch % (3600 * 24);
+   const auto seconds_into_today = seconds_since_epoch % (3600 * 24);
    auto hours = seconds_into_today / 3600;
    // Very basic conversion to my timezone - WIP
    hours += 1;
    auto minutes = (seconds_into_today % 3600) / 60;
 
-   return std::format("{}:{}", hours, minutes);
+   return std::format("{:02}:{:02}", hours, minutes);
 }
 
 inline std::vector<std::string> get_weather() {
@@ -42,7 +42,7 @@ inline std::vector<std::string> get_weather() {
    std::vector<std::string> lines{};
 
    while (getline(ifs, weather_line)) {
-      if (weather_line.size() == 0) continue;
+      if (weather_line.empty()) continue;
       if (weather_line.starts_with("Weather report: London")) continue;
 
       std::string l = weather_line.substr(0, 16) + weather_line.substr(16, 14) + '\n';
