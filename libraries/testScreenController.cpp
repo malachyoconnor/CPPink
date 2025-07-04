@@ -10,10 +10,6 @@
 
 constexpr int FPS = 60;
 
-std::unique_ptr<TestScreenController> TestScreenController::create() {
-   return std::unique_ptr<TestScreenController>(new TestScreenController());
-}
-
 TestScreenController::TestScreenController() {
    screen_thread = std::thread(&TestScreenController::raylibScreenManager, this);
 
@@ -47,9 +43,8 @@ TestScreenController::~TestScreenController() {
    CloseWindow();
 }
 
-TestScreenController& TestScreenController::createGui() {
-   static auto singletonPointer = create();
-   return *singletonPointer;
+std::shared_ptr<TestScreenController> TestScreenController::createGui() {
+   return std::shared_ptr<TestScreenController>(new TestScreenController());
 }
 
 void TestScreenController::UpdateScreen() {

@@ -19,9 +19,6 @@ class TestScreenController : public BaseScreenController {
    friend struct std::default_delete<TestScreenController>;
    friend struct std::unique_ptr<TestScreenController>;
 
-protected:
-   static std::unique_ptr<TestScreenController> create();
-
 private:
    TestScreenController();
    std::array<std::array<UBYTE, EPD_7IN5_V2_WIDTH>, EPD_7IN5_V2_HEIGHT> pixels_{};
@@ -34,7 +31,7 @@ private:
 public:
    ~TestScreenController();
 
-   static TestScreenController& createGui();
+   static std::shared_ptr<TestScreenController> createGui();
 
    TestScreenController(const TestScreenController&) = delete;
 

@@ -6,6 +6,7 @@
 #include "utils/bmpManager.h"
 #include "helper_funcs.h"
 #include "testScreenController.h"
+#include "WeatherGUI.h"
 
 using namespace std;
 
@@ -14,25 +15,17 @@ int main() {
    signal(SIGINT, exit);
 
    try {
-      BaseScreenController& screenController = TestScreenController::createGui();
-
-      screenController.DrawLine({0, 0}, {50, 100});
+      std::shared_ptr<BaseScreenController> screenController = TestScreenController::createGui();
+      WeatherGui weather = WeatherGui(BoundaryBox{{50, 50}, {100, 100}},
+                                      screenController);
 
       while (true) {
-         screenController.ClearScreen();
-         auto l = get_weather();
+         weather.Render();
 
-         screenController.DrawText_(get_time(),{5, 5});
-
-         for (size_t i = 0; i < l.size(); ++i) {
-            screenController.DrawText_(l[i], {150, static_cast<int>(150 + 24 * i)});
-         }
-
-         screenController.UpdateScreen();
-         screenController.Sleep(60 * 1000);
+         screenController->UpdateScreen();
+         screenController->Sleep(5 * 1000);
       }
-   }
-   catch (exception& e) {
+   } catch (exception &e) {
       cout << e.what() << endl;
       return 0;
    }

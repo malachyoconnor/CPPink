@@ -22,7 +22,7 @@ inline std::string get_time() {
    return std::format("{:02}:{:02}", hours, minutes);
 }
 
-inline std::vector<std::string> get_weather() {
+inline std::vector<std::string> get_weather_text() {
    const std::string output_file = "./pics/weather.txt";
 
    int code = system(std::format(

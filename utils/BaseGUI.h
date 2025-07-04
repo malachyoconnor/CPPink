@@ -1,10 +1,10 @@
 #ifndef BASEGUI_H
 #define BASEGUI_H
+#include <utility>
+
 #include "BaseScreenController.h"
 #include "BoundaryBox.h"
 #include "testScreenController.h"
-
-class BaseScreenController;
 
 class BaseGUI {
 private:
@@ -14,8 +14,10 @@ public:
    virtual ~BaseGUI() = default;
 
    BaseGUI(const BoundaryBox boundary, std::shared_ptr<BaseScreenController> screen_controller) : subWindow(boundary),
-      screenController(screen_controller) {
+      screenController(std::move(screen_controller)) {
    };
+
+   virtual void Render() = 0;
 
 protected:
    BoundaryBox subWindow;
