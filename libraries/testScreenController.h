@@ -6,9 +6,9 @@
 #include <thread>
 #include <vector>
 
-#include "BaseScreenController.h"
-#include "point.h"
-#include "bounding_box.h"
+#include "../utils/BaseScreenController.h"
+#include "Point.h"
+#include "BoundaryBox.h"
 
 const BoundaryBox SCREEN_BOUNDS = {
    {0, 0},
@@ -60,11 +60,11 @@ public:
 
    void DrawBMP(BmpImage& image);
 
-   BoundaryBox DrawText_(string stringToDraw, Point bottomLeftBoundary);
+   BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary);
 
    void Sleep(int millis);
 
-   void SaveScreenToBmp(filesystem::path& path) const;
+   void SaveScreenToBmp(std::filesystem::path& path) const;
 };
 
 #endif  // MYGUI_H

@@ -50,11 +50,11 @@ public:
    [[nodiscard]] bool withinBounds(BoundaryBox bounds) const;
 
    static Point PointMaximums(Point p1, Point p2) {
-      return {max(p1.x, p2.x), max(p1.y, p2.y)};
+      return {std::max(p1.x, p2.x), std::max(p1.y, p2.y)};
    }
 
    static Point PointMinimums(Point p1, Point p2) {
-      return {min(p1.x, p2.x), min(p1.y, p2.y)};
+      return {std::min(p1.x, p2.x), std::min(p1.y, p2.y)};
    }
 };
 

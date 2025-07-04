@@ -5,10 +5,10 @@
 #include <memory>
 #include <vector>
 
-#include "BaseScreenController.h"
-#include "bmpManager.h"
-#include "point.h"
-#include "bounding_box.h"
+#include "../utils/BaseScreenController.h"
+#include "../utils/bmpManager.h"
+#include "Point.h"
+#include "BoundaryBox.h"
 
 // Each bit is a pixel.
 using PIXEL_ARRAY =
@@ -66,11 +66,11 @@ public:
 
    void DrawBMP(BmpImage& image);
 
-   BoundaryBox DrawText_(string stringToDraw, Point bottomLeftBoundary);
+   BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary);
 
    void Sleep(int millis);
 
-   void SaveScreenToBmp(filesystem::path& path) const;
+   void SaveScreenToBmp(std::filesystem::path& path) const;
 };
 
 #endif  // MYGUI_H

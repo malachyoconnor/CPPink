@@ -11,7 +11,7 @@
 constexpr int FPS = 60;
 
 std::unique_ptr<TestScreenController> TestScreenController::create() {
-   return unique_ptr<TestScreenController>(new TestScreenController());
+   return std::unique_ptr<TestScreenController>(new TestScreenController());
 }
 
 TestScreenController::TestScreenController() {
@@ -100,7 +100,7 @@ void TestScreenController::DrawRectangleWithoutUpdating(Point p1, Point p2) {
 void TestScreenController::DrawBMP(BmpImage& image) {
 }
 
-BoundaryBox TestScreenController::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
+BoundaryBox TestScreenController::DrawText_(std::string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
    for (char charToDraw : stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
@@ -121,7 +121,7 @@ void TestScreenController::Sleep(int millis) {
    std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 }
 
-void TestScreenController::SaveScreenToBmp(filesystem::path& path) const {
+void TestScreenController::SaveScreenToBmp(std::filesystem::path& path) const {
 }
 
 BoundaryBox TestScreenController::DrawChar(char toDraw, Point bottomLeft) {

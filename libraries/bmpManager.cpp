@@ -1,5 +1,5 @@
 #include <GUI_BMPfile.h>
-#include <bmpManager.h>
+#include <../utils/bmpManager.h>
 
 #include <array>
 #include <filesystem>

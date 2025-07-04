@@ -1,7 +1,7 @@
 #ifndef BOUNDING_BOX_H
 #define BOUNDING_BOX_H
 
-#include <point.h>
+#include <Point.h>
 #include <ostream>
 
 struct BoundaryBox {

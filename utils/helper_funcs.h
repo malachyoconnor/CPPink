@@ -10,7 +10,7 @@
 inline std::string get_time() {
    // Epoch was 01 Jan 1970
    const auto seconds_since_epoch =
-      chrono::system_clock::now().time_since_epoch().count() /
+         std::chrono::system_clock::now().time_since_epoch().count() /
       1'000'000'000;
 
    const auto seconds_into_today = seconds_since_epoch % (3600 * 24);
@@ -29,12 +29,12 @@ inline std::vector<std::string> get_weather() {
       "curl -sf wttr.in/London | head -n 7 | ansi2txt | iconv -f utf8 -t ascii//TRANSLIT > {}",
       output_file).c_str());
    if (code != 0) {
-      throw runtime_error(std::format("Weather call failed with code: {}", code));
+      throw std::runtime_error(std::format("Weather call failed with code: {}", code));
    }
 
    std::ifstream ifs(output_file);
    if (!ifs.is_open()) {
-      throw runtime_error("could not open weather file");
+      throw std::runtime_error("could not open weather file");
    }
 
    std::stringstream ss{};

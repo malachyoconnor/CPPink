@@ -6,17 +6,17 @@
 #include <format>
 
 #include "fonts.h"
-#include "bmpManager.h"
+#include "../utils/bmpManager.h"
 
 ScreenController::ScreenController() {
-   cout << "Initializing GUI" << endl;
+   std::cout << "Initializing GUI" << std::endl;
    if (DEV_Module_Init() != 0) {
       throw std::system_error(errno, std::system_category());
    }
    EPD_7IN5_V2_Init();
    EPD_7IN5_V2_Clear();
    // Fill the screen with white
-   fill_n(&pixels_[0][0], SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT, 0xFF);
+   std::fill_n(&pixels_[0][0], SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT, 0xFF);
 }
 
 ScreenController::~ScreenController() {
@@ -30,7 +30,7 @@ ScreenController::~ScreenController() {
    DEV_Module_Exit();
 }
 
-vector<UBYTE> ScreenController::getPixelCopyForScreen() {
+std::vector<UBYTE> ScreenController::getPixelCopyForScreen() {
    return {
       &pixels_[0][0],
       &pixels_[0][0] + (SCREEN_ARRAY_WIDTH * SCREEN_ARRAY_HEIGHT)
@@ -80,7 +80,7 @@ void ScreenController::DrawBlackPixel(int x, int y) {
 
    if (rowByteNumber > SCREEN_ARRAY_HEIGHT ||
       colByteNumber > SCREEN_ARRAY_WIDTH) {
-      cout << rowByteNumber << " " << colByteNumber << endl;
+      std::cout << rowByteNumber << " " << colByteNumber << std::endl;
       throw std::runtime_error("Invalid screen array index");
    }
 
@@ -107,13 +107,13 @@ void ScreenController::PrintInternalArray() const {
 
 void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
    if (p1.y == p2.y) {
-      for (int x = min(p1.x, p2.x); x <= max(p1.x, p2.x); x++) {
+      for (int x = std::min(p1.x, p2.x); x <= std::max(p1.x, p2.x); x++) {
          DrawBlackPixel(x, p1.y);
       }
       return;
    }
    if (p1.x == p2.x) {
-      for (int y = min(p1.y, p2.y); y <= max(p1.y, p2.y); y++) {
+      for (int y = std::min(p1.y, p2.y); y <= std::max(p1.y, p2.y); y++) {
          DrawBlackPixel(p1.x, y);
       }
       return;
@@ -139,7 +139,7 @@ void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
 
          const double perfectY = M * x + C;
          while (abs(perfectY - currY) >=
-            1 - numeric_limits<double>::epsilon()) {
+            1 - std::numeric_limits<double>::epsilon()) {
             if (perfectY - currY > 0) {
                currY += 1;
             }
@@ -163,7 +163,7 @@ void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
 
          const double perfectX = (y - C) / M;
          while (abs(perfectX - currX) >=
-            1 - numeric_limits<double>::epsilon()) {
+            1 - std::numeric_limits<double>::epsilon()) {
             if (perfectX - currX >= 0) {
                currX += 1;
             }
@@ -231,7 +231,7 @@ BoundaryBox ScreenController::DrawChar(char toDraw, Point bottomLeft) {
    return {topLeftBoundary, {bottomLeft.x + fontWidth, bottomLeft.y}};
 }
 
-BoundaryBox ScreenController::DrawText_(string stringToDraw, Point bottomLeftBoundary) {
+BoundaryBox ScreenController::DrawText_(std::string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
    for (char charToDraw : stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
@@ -249,13 +249,13 @@ BoundaryBox ScreenController::DrawText_(string stringToDraw, Point bottomLeftBou
 }
 
 void ScreenController::DrawBMP(BmpImage& image) {
-   cout << image.data.size() << endl;
+   std::cout << image.data.size() << std::endl;
    UpdateScreen();
 }
 
 void ScreenController::Sleep(const int millis) { DEV_Delay_ms(millis); }
 
-void ScreenController::SaveScreenToBmp(filesystem::path& path) const {
+void ScreenController::SaveScreenToBmp(std::filesystem::path& path) const {
    BmpImage pixelBmpImage = CreateBMP(pixels_);
    SaveBMP(path, pixelBmpImage);
 }

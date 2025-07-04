@@ -3,7 +3,7 @@
 #include <fstream>
 #include <random>
 
-#include "bmpManager.h"
+#include "utils/bmpManager.h"
 #include "helper_funcs.h"
 #include "testScreenController.h"
 
