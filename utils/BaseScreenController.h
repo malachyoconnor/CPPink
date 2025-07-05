@@ -19,11 +19,12 @@ public:
 
    // Drawing methods
    virtual void DrawBlackPixel(int x, int y) = 0;
+   virtual void DrawWhitePixel(int x, int y) = 0;
    virtual void DrawLine(Point p1, Point p2) = 0;
    virtual void DrawLineWithoutUpdating(Point p1, Point p2) = 0;
    virtual void DrawRectangle(Point topLeft, Point bottomRight) = 0;
    virtual void DrawRectangleWithoutUpdating(Point p1, Point p2) = 0;
-   virtual void DrawBMP(BmpImage& image) = 0;
+   virtual void DrawBMP(const BmpImage& image, Point bottomLeftBoundary) = 0;
    virtual BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary) = 0;
 
    // Utils

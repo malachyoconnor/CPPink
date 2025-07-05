@@ -58,7 +58,9 @@ public:
 
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);
 
-   void DrawBlackPixel(int x, int y);
+   void DrawBlackPixel(int x, int y) override;
+
+   void DrawWhitePixel(int x, int y) override;
 
    void DrawLine(Point p1, Point p2);
 
@@ -68,7 +70,7 @@ public:
 
    void DrawRectangleWithoutUpdating(Point p1, Point p2);
 
-   void DrawBMP(BmpImage& image);
+   void DrawBMP(const BmpImage& image, Point bottomLeftBoundary) override;
 
    BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary);
 

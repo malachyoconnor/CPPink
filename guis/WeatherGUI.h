@@ -13,7 +13,7 @@ public:
    };
 
    void Render() override {
-      screenController->StartScissorsMode(subWindow);
+      // screenController->StartScissorsMode(subWindow);
       auto weather_lines = get_weather_text();
 
       screenController->DrawText_(get_time(), {5, 5});
@@ -22,8 +22,7 @@ public:
          screenController->DrawText_(weather_lines[i], {150,
             static_cast<int>(150 + 24 * i)});
       }
-      screenController->EndScissorsMode();
-      std::cout << "test_working" << std::endl;
+      // screenController->EndScissorsMode();
    }
 };
 

@@ -89,6 +89,22 @@ void ScreenController::DrawBlackPixel(int x, int y) {
    pixels_[rowByteNumber][colByteNumber] = finalByte;
 }
 
+void ScreenController::DrawWhitePixel(int x, int y) {
+   auto const colByteNumber = x / 8;
+   auto const bitNumber = x % 8;
+   auto const rowByteNumber = y;
+
+   if (rowByteNumber > SCREEN_ARRAY_HEIGHT ||
+      colByteNumber > SCREEN_ARRAY_WIDTH) {
+      std::cout << rowByteNumber << " " << colByteNumber << std::endl;
+      throw std::runtime_error("Invalid screen array index");
+   }
+
+   const UBYTE initialByte = pixels_[rowByteNumber][colByteNumber];
+   const UBYTE finalByte = initialByte || (0x80 >> bitNumber);
+   pixels_[rowByteNumber][colByteNumber] = finalByte;
+}
+
 std::unique_ptr<ScreenController> ScreenController::create() {
    return std::unique_ptr<ScreenController>(new ScreenController());
 }
@@ -193,6 +209,11 @@ void ScreenController::DrawRectangleWithoutUpdating(Point topLeft, Point bottomR
    this->DrawLineWithoutUpdating(bottomLeft, topLeft);
 }
 
+void ScreenController::DrawBMP(const BmpImage& image, Point bottomLeftBoundary) {
+   std::cout << image.data.size() << std::endl;
+   // TODO: Implement this.
+}
+
 void ScreenController::DrawRectangle(Point topLeft, Point bottomRight) {
    this->DrawRectangleWithoutUpdating(topLeft, bottomRight);
    this->UpdateScreen();
@@ -247,14 +268,9 @@ BoundaryBox ScreenController::DrawText_(std::string stringToDraw, Point bottomLe
    };
 }
 
-void ScreenController::DrawBMP(BmpImage &image) {
-   std::cout << image.data.size() << std::endl;
-   UpdateScreen();
-}
-
 void ScreenController::Sleep(const int millis) { DEV_Delay_ms(millis); }
 
 void ScreenController::SaveScreenToBmp(std::filesystem::path &path) const {
-   BmpImage pixelBmpImage = CreateBMP(pixels_);
-   SaveBMP(path, pixelBmpImage);
+   BmpImage pixelBmpImage = BmpManager::CreateBMP(pixels_);
+   BmpManager::SaveBMP(path, pixelBmpImage);
 }

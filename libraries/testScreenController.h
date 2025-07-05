@@ -39,30 +39,23 @@ public:
 
    TestScreenController& operator=(const TestScreenController&) = delete;
 
-   void UpdateScreen();
-
-   void ClearScreen();
-
-   void PrintInternalArray() const;
-
-   void StartScissorsMode(BoundaryBox view);
-   void EndScissorsMode();
+   void UpdateScreen() override;
+   void ClearScreen() override;
+   void PrintInternalArray() const override;
+   void StartScissorsMode(BoundaryBox view) override;
+   void EndScissorsMode() override;
 
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);
 
-   void DrawBlackPixel(int x, int y);
-
-   void DrawLine(Point p1, Point p2);
-
+   void DrawBlackPixel(int x, int y) override;
+   void DrawWhitePixel(int x, int y) override;
+   void DrawLine(Point p1, Point p2) override;
    void DrawLineWithoutUpdating(Point p1, Point p2);
-
    void DrawRectangle(Point topLeft, Point bottomRight);
-
    void DrawRectangleWithoutUpdating(Point p1, Point p2);
+   void DrawBMP(const BmpImage& image, Point bottomLeftBoundary) override;
 
-   void DrawBMP(BmpImage& image);
-
-   BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary);
+   BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary) override;
 
    void Sleep(int millis);
 
