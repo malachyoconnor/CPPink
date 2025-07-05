@@ -52,6 +52,10 @@ public:
 
    void PrintInternalArray() const;
 
+   void StartScissorsMode(BoundaryBox view);
+
+   void EndScissorsMode();
+
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);
 
    void DrawBlackPixel(int x, int y);

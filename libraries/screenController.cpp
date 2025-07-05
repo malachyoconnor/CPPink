@@ -48,8 +48,8 @@ void ScreenController::UpdateScreen() {
 }
 
 void ScreenController::ClearScreen() {
-   for (auto& arr : pixels_) {
-      for (auto& ch : arr) {
+   for (auto &arr: pixels_) {
+      for (auto &ch: arr) {
          ch = 255;
       }
    }
@@ -79,7 +79,7 @@ void ScreenController::DrawBlackPixel(int x, int y) {
    auto const rowByteNumber = y;
 
    if (rowByteNumber > SCREEN_ARRAY_HEIGHT ||
-      colByteNumber > SCREEN_ARRAY_WIDTH) {
+       colByteNumber > SCREEN_ARRAY_WIDTH) {
       std::cout << rowByteNumber << " " << colByteNumber << std::endl;
       throw std::runtime_error("Invalid screen array index");
    }
@@ -89,16 +89,18 @@ void ScreenController::DrawBlackPixel(int x, int y) {
    pixels_[rowByteNumber][colByteNumber] = finalByte;
 }
 
-std::unique_ptr<ScreenController> ScreenController::create() { return std::unique_ptr<ScreenController>(new ScreenController()); }
+std::unique_ptr<ScreenController> ScreenController::create() {
+   return std::unique_ptr<ScreenController>(new ScreenController());
+}
 
-ScreenController& ScreenController::createGui() {
+ScreenController &ScreenController::createGui() {
    static auto singletonPointer = create();
    return *singletonPointer;
 }
 
 void ScreenController::PrintInternalArray() const {
-   for (const auto& row : pixels_) {
-      for (const auto& col : row) {
+   for (const auto &row: pixels_) {
+      for (const auto &col: row) {
          std::cout << std::bitset<8>(col) << " ";
       }
       std::cout << std::endl;
@@ -120,7 +122,7 @@ void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
    }
 
    const double M = (static_cast<double>(p2.y) - static_cast<double>(p1.y)) /
-      (static_cast<double>(p2.x) - static_cast<double>(p1.x));
+                    (static_cast<double>(p2.x) - static_cast<double>(p1.x));
    const double C = static_cast<double>(p1.y) - M * static_cast<double>(p1.x);
 
    int dx = abs(p2.x - p1.x);
@@ -139,18 +141,16 @@ void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
 
          const double perfectY = M * x + C;
          while (abs(perfectY - currY) >=
-            1 - std::numeric_limits<double>::epsilon()) {
+                1 - std::numeric_limits<double>::epsilon()) {
             if (perfectY - currY > 0) {
                currY += 1;
-            }
-            else {
+            } else {
                currY -= 1;
             }
             DrawBlackPixel(x, static_cast<int>(currY));
          }
       }
-   }
-   else {
+   } else {
       int startX = p1.x, startY = p1.y, endY = p2.y;
       if (p1.y > p2.y) {
          std::swap(startY, endY);
@@ -163,11 +163,10 @@ void ScreenController::DrawLineWithoutUpdating(Point p1, Point p2) {
 
          const double perfectX = (y - C) / M;
          while (abs(perfectX - currX) >=
-            1 - std::numeric_limits<double>::epsilon()) {
+                1 - std::numeric_limits<double>::epsilon()) {
             if (perfectX - currX >= 0) {
                currX += 1;
-            }
-            else {
+            } else {
                currX -= 1;
             }
             DrawBlackPixel(static_cast<int>(currX), y);
@@ -201,7 +200,7 @@ void ScreenController::DrawRectangle(Point topLeft, Point bottomRight) {
 
 BoundaryBox ScreenController::DrawChar(char toDraw, Point bottomLeft) {
    if (not SCREEN_BOUNDS.contains(bottomLeft) or
-      not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
+       not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
       throw std::runtime_error(std::format(
          "Trying to draw a character out of bounds. We tried to draw at {}x{} "
          "for the screen which has a size of {}x{}",
@@ -213,9 +212,9 @@ BoundaryBox ScreenController::DrawChar(char toDraw, Point bottomLeft) {
 
    Point topLeftBoundary = {bottomLeft.x, bottomLeft.y + fontHeight};
    uint32_t Char_Offset =
-      (toDraw - ' ') * fontHeight * (fontWidth / 8 + (fontWidth % 8 ? 1 : 0));
+         (toDraw - ' ') * fontHeight * (fontWidth / 8 + (fontWidth % 8 ? 1 : 0));
 
-   const unsigned char* ptr = &fontTable[Char_Offset];
+   const unsigned char *ptr = &fontTable[Char_Offset];
 
    for (UWORD Page = 0; Page < fontHeight; Page++) {
       for (UWORD Column = 0; Column < fontWidth; Column++) {
@@ -233,7 +232,7 @@ BoundaryBox ScreenController::DrawChar(char toDraw, Point bottomLeft) {
 
 BoundaryBox ScreenController::DrawText_(std::string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
-   for (char charToDraw : stringToDraw) {
+   for (char charToDraw: stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
       currentBottomLeft.x = resultBoundary.topRight.x;
    }
@@ -242,20 +241,20 @@ BoundaryBox ScreenController::DrawText_(std::string stringToDraw, Point bottomLe
       {bottomLeftBoundary.x, bottomLeftBoundary.y + Font24.Height},
       {
          static_cast<int>(bottomLeftBoundary.x +
-            stringToDraw.size() * Font24.Width),
+                          stringToDraw.size() * Font24.Width),
          bottomLeftBoundary.y
       }
    };
 }
 
-void ScreenController::DrawBMP(BmpImage& image) {
+void ScreenController::DrawBMP(BmpImage &image) {
    std::cout << image.data.size() << std::endl;
    UpdateScreen();
 }
 
 void ScreenController::Sleep(const int millis) { DEV_Delay_ms(millis); }
 
-void ScreenController::SaveScreenToBmp(std::filesystem::path& path) const {
+void ScreenController::SaveScreenToBmp(std::filesystem::path &path) const {
    BmpImage pixelBmpImage = CreateBMP(pixels_);
    SaveBMP(path, pixelBmpImage);
 }

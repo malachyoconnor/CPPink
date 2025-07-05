@@ -13,6 +13,10 @@ public:
    virtual void UpdateScreen() = 0;
    virtual void ClearScreen() = 0;
 
+   // Drawing Modes
+   virtual void StartScissorsMode(BoundaryBox view) = 0;
+   virtual void EndScissorsMode() = 0;
+
    // Drawing methods
    virtual void DrawBlackPixel(int x, int y) = 0;
    virtual void DrawLine(Point p1, Point p2) = 0;

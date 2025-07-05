@@ -3,6 +3,7 @@
 
 #include <array>
 #include <memory>
+#include <optional>
 #include <thread>
 #include <vector>
 
@@ -27,6 +28,7 @@ private:
    void raylibScreenManager();
    std::thread screen_thread;
    std::atomic_bool screen_changed = false;
+   std::optional<BoundaryBox> current_scissors = {};
 
 public:
    ~TestScreenController();
@@ -42,6 +44,9 @@ public:
    void ClearScreen();
 
    void PrintInternalArray() const;
+
+   void StartScissorsMode(BoundaryBox view);
+   void EndScissorsMode();
 
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);
 

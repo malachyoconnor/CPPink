@@ -16,7 +16,7 @@ int main() {
 
    try {
       std::shared_ptr<BaseScreenController> screenController = TestScreenController::createGui();
-      WeatherGui weather = WeatherGui(BoundaryBox{{50, 50}, {100, 100}},
+      auto weather = WeatherGui(BoundaryBox{{50, 50}, {450, 450}},
                                       screenController);
 
       while (true) {
