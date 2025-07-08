@@ -23,7 +23,7 @@ void TestScreenController::raylibScreenManager() {
    InitWindow(width, height, "Hello");
 
    while (!WindowShouldClose()) {
-      if (screen_changed.exchange(false)) {
+      if (screen_should_update.exchange(false)) {
          BeginDrawing();
 
          for (int x = 0; x < width; ++x) {
@@ -48,12 +48,12 @@ std::shared_ptr<TestScreenController> TestScreenController::createGui() {
 }
 
 void TestScreenController::UpdateScreen() {
-   this->screen_changed.exchange(true);
+   this->screen_should_update.exchange(true);
 }
 
 void TestScreenController::ClearScreen() {
-   for (auto& arr : pixels_) {
-      for (auto& ch : arr) {
+   for (auto &arr: pixels_) {
+      for (auto &ch: arr) {
          ch = 0;
       }
    }
@@ -80,7 +80,7 @@ void TestScreenController::DrawBlackPixel(int x, int y) {
    if (current_scissors.has_value()) {
       if (!current_scissors.value().contains({x, y})) {
          std::cout << "Trying to draw outside this scissors boundary:" << current_scissors.value() << " at pixel: " << x
-            << ", " << y << std::endl;
+               << ", " << y << std::endl;
          return;
       }
    }
@@ -118,10 +118,9 @@ void TestScreenController::DrawRectangle(Point topLeft, Point bottomRight) {
 void TestScreenController::DrawRectangleWithoutUpdating(Point p1, Point p2) {
 }
 
-void TestScreenController::DrawBMP(const BmpImage& image, const Point bottomLeftBoundary) {
+void TestScreenController::DrawBMP(const BmpImage &image, const Point bottomLeftBoundary) {
    std::cout << image.data.size() << std::endl;
    std::cout << image.bmpInfoHeader.biHeight * image.bmpInfoHeader.biWidth << std::endl;
-
 
    for (int y = 0; y < image.bmpInfoHeader.biHeight; ++y) {
       for (int x = 0; x < image.bmpInfoHeader.biWidth; ++x) {
@@ -129,8 +128,7 @@ void TestScreenController::DrawBMP(const BmpImage& image, const Point bottomLeft
 
          if (pixel) {
             DrawWhitePixel(x + bottomLeftBoundary.x, y + bottomLeftBoundary.y);
-         }
-         else {
+         } else {
             DrawBlackPixel(x + bottomLeftBoundary.x, y + bottomLeftBoundary.y);
          }
       }
@@ -139,7 +137,7 @@ void TestScreenController::DrawBMP(const BmpImage& image, const Point bottomLeft
 
 BoundaryBox TestScreenController::DrawText_(std::string stringToDraw, Point bottomLeftBoundary) {
    Point currentBottomLeft = bottomLeftBoundary;
-   for (char charToDraw : stringToDraw) {
+   for (char charToDraw: stringToDraw) {
       BoundaryBox resultBoundary = DrawChar(charToDraw, currentBottomLeft);
       currentBottomLeft.x = resultBoundary.topRight.x;
    }
@@ -148,7 +146,7 @@ BoundaryBox TestScreenController::DrawText_(std::string stringToDraw, Point bott
       {bottomLeftBoundary.x, bottomLeftBoundary.y + Font24.Height},
       {
          static_cast<int>(bottomLeftBoundary.x +
-            stringToDraw.size() * Font24.Width),
+                          stringToDraw.size() * Font24.Width),
          bottomLeftBoundary.y
       }
    };
@@ -158,12 +156,12 @@ void TestScreenController::Sleep(int millis) {
    std::this_thread::sleep_for(std::chrono::milliseconds(millis));
 }
 
-void TestScreenController::SaveScreenToBmp(std::filesystem::path& path) const {
+void TestScreenController::SaveScreenToBmp(std::filesystem::path &path) const {
 }
 
 BoundaryBox TestScreenController::DrawChar(char toDraw, Point bottomLeft) {
    if (not SCREEN_BOUNDS.contains(bottomLeft) or
-      not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
+       not SCREEN_BOUNDS.contains(bottomLeft + Point{Font24.Width, 0})) {
       throw std::runtime_error(std::format(
          "Trying to draw a character out of bounds. We tried to draw at {}x{} "
          "for the screen which has a size of {}x{}",
@@ -175,9 +173,9 @@ BoundaryBox TestScreenController::DrawChar(char toDraw, Point bottomLeft) {
 
    Point topLeftBoundary = {bottomLeft.x, bottomLeft.y + fontHeight};
    uint32_t Char_Offset =
-      (toDraw - ' ') * fontHeight * (fontWidth / 8 + (fontWidth % 8 ? 1 : 0));
+         (toDraw - ' ') * fontHeight * (fontWidth / 8 + (fontWidth % 8 ? 1 : 0));
 
-   const unsigned char* ptr = &fontTable[Char_Offset];
+   const unsigned char *ptr = &fontTable[Char_Offset];
 
    for (UWORD Page = 0; Page < fontHeight; Page++) {
       for (UWORD Column = 0; Column < fontWidth; Column++) {

@@ -40,7 +40,7 @@ BmpImage BmpManager::LoadBMP(const filesystem::path& path) {
    // Skip any bytes inbetween the headers and the data
    fileStream.seekg(bmpFileHeader.bOffset, std::ios::beg);
 
-   int imageWidthInBytes = bmpInfoHeader.biWidth % 8 == 0
+   uint32_t imageWidthInBytes = bmpInfoHeader.biWidth % 8 == 0
                               ? bmpInfoHeader.biWidth / 8
                               : bmpInfoHeader.biWidth / 8 + 1;
    auto imageBytesToRead = imageWidthInBytes * bmpInfoHeader.biHeight;

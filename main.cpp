@@ -20,10 +20,6 @@ int main() {
 
       while (true) {
          weather.Render();
-         // auto bmp = BmpManager::LoadBMP("./pics/100x80.bmp");
-         auto bmp = BmpManager::LoadBMP("./pics/100x100.bmp");
-         screenController->DrawBMP(bmp, {100, 100});
-
          screenController->UpdateScreen();
          screenController->Sleep(5 * 1000);
       }

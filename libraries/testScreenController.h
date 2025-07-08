@@ -27,7 +27,7 @@ private:
 
    void raylibScreenManager();
    std::thread screen_thread;
-   std::atomic_bool screen_changed = false;
+   std::atomic_bool screen_should_update = false;
    std::optional<BoundaryBox> current_scissors = {};
 
 public:

@@ -18,10 +18,9 @@ public:
       screenController->DrawText_(get_time(), {5, 5});
 
       for (size_t i = 0; i < weather_lines.size(); ++i) {
-         screenController->DrawText_(weather_lines[i], {
-                                        150,
-                                        static_cast<int>(150 + 24 * i)
-                                     });
+         int x = 150;
+         int y = 150 + 24 * i;
+         screenController->DrawText_(weather_lines[i], {x, y});
       }
       // screenController->EndScissorsMode();
    }
