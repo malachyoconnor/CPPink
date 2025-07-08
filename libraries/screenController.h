@@ -23,60 +23,43 @@ class ScreenController : public BaseScreenController {
    friend struct std::default_delete<ScreenController>;
    friend struct std::unique_ptr<ScreenController>;
 
-protected:
-   static std::unique_ptr<ScreenController> create();
-
-private:
-   ScreenController();
-
-   PIXEL_ARRAY pixels_{};
-
-   std::vector<UBYTE> getPixelCopyForScreen();
-
-   bool DISPLAY_PARTIAL_ENABLED = false;
-
-   BoundaryBox DrawChar(char toDraw, Point bottomLeft);
-
 public:
    ~ScreenController();
 
    static ScreenController& createGui();
-
    ScreenController(const ScreenController&) = delete;
-
    ScreenController& operator=(const ScreenController&) = delete;
 
+   void PrintInternalArray() const;
    void UpdateScreen();
-
    void ClearScreen();
 
-   void PrintInternalArray() const;
-
    void StartScissorsMode(BoundaryBox view);
-
    void EndScissorsMode();
 
    // void UpdatePartOfScreen(Point bottomLeft, Point topRight);
 
    void DrawBlackPixel(int x, int y) override;
-
    void DrawWhitePixel(int x, int y) override;
-
    void DrawLine(Point p1, Point p2);
-
    void DrawLineWithoutUpdating(Point p1, Point p2);
-
    void DrawRectangle(Point topLeft, Point bottomRight);
-
    void DrawRectangleWithoutUpdating(Point p1, Point p2);
-
    void DrawBMP(const BmpImage& image, Point bottomLeftBoundary) override;
-
    BoundaryBox DrawText_(std::string stringToDraw, Point bottomLeftBoundary);
-
    void Sleep(int millis);
-
    void SaveScreenToBmp(std::filesystem::path& path) const;
+
+protected:
+   static std::unique_ptr<ScreenController> create();
+
+private:
+   PIXEL_ARRAY pixels_{};
+   bool DISPLAY_PARTIAL_ENABLED = false;
+
+   ScreenController();
+   std::vector<UBYTE> getPixelCopyForScreen();
+   BoundaryBox DrawChar(char toDraw, Point bottomLeft);
 };
 
 #endif  // MYGUI_H

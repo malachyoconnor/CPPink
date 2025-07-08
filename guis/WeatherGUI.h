@@ -1,6 +1,5 @@
 #ifndef TRAINGUI_H
 #define TRAINGUI_H
-#include <iostream>
 #include <utility>
 
 #include "helper_funcs.h"
@@ -19,8 +18,10 @@ public:
       screenController->DrawText_(get_time(), {5, 5});
 
       for (size_t i = 0; i < weather_lines.size(); ++i) {
-         screenController->DrawText_(weather_lines[i], {150,
-            static_cast<int>(150 + 24 * i)});
+         screenController->DrawText_(weather_lines[i], {
+                                        150,
+                                        static_cast<int>(150 + 24 * i)
+                                     });
       }
       // screenController->EndScissorsMode();
    }

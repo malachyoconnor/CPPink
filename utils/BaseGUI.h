@@ -6,10 +6,8 @@
 #include "BoundaryBox.h"
 
 class BaseGUI {
-private:
-   BaseGUI() = delete;
-
 public:
+   BaseGUI() = delete;
    virtual ~BaseGUI() = default;
 
    BaseGUI(const BoundaryBox boundary, std::shared_ptr<BaseScreenController> screen_controller) : subWindow(boundary),
